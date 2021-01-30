@@ -1,28 +1,34 @@
-// eslint-disable-next-line no-console
-console.log('fvf');
-
-let getRandom = function (min, max) {
+const getRandomRange = (min, max) => {
   if (min < 0 || max < 0) {
     // eslint-disable-next-line no-console
-    console.log('отрицательных значений функция не принимает');
+    console.log('Отрицательных значений функция не принимает');
+
     return;
   }
-  let factor = Math.random ();
-  let randomNumber = min + (max - min) * factor;
-  return randomNumber;
+
+  if (min > max) {
+    let tmp = max;
+    max = min;
+    min = tmp;
+  }
+
+  return min + (max - min) * Math.random ();
 }
 
 //Функция целочисленного рандомного числа
-let getIntegerRandom = function (min, max) {
-  let randomNumber = getRandom(min, max);
+const getIntegerRandomRange = (min, max) => {
+  const randomNumber = getRandomRange(min, max);
+
   return Math.round(randomNumber);
 }
-getIntegerRandom(5,1);
+
+getIntegerRandomRange(5, 1);
 
 //Функция дробного рандомного числа
+const getFloatRandomRange = (min, max, significand=2) => {
+  const randomNumber = getRandomRange(min, max);
 
-let getFloatRandom = function (min, max, significand='2') {
-  let randomNumber = getRandom(min, max);
   return Number(randomNumber.toFixed(significand));
 }
-getFloatRandom(1,1,2)
+
+getFloatRandomRange(1, 1, 2)
