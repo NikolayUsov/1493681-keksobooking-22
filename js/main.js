@@ -7,28 +7,26 @@ const getRandomRange = (min, max) => {
   }
 
   if (min > max) {
-    let tmp = max;
-    max = min;
-    min = tmp;
+    [min, max] = [max, min];
   }
 
   return min + (max - min) * Math.random ();
 }
 
 //Функция целочисленного рандомного числа
-const getIntegerRandomRange = (min, max) => {
+const getRandomIntegerInRange = (min, max) => {
   const randomNumber = getRandomRange(min, max);
 
   return Math.round(randomNumber);
 }
 
-getIntegerRandomRange(5, 1);
+getRandomIntegerInRange(5, 1);
 
 //Функция дробного рандомного числа
-const getFloatRandomRange = (min, max, significand=2) => {
+const getRandomFloatInRange = (min, max, significand = 2) => {
   const randomNumber = getRandomRange(min, max);
 
   return Number(randomNumber.toFixed(significand));
 }
 
-getFloatRandomRange(1, 1, 2)
+getRandomFloatInRange(1, 1, 2)
