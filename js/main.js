@@ -141,7 +141,6 @@ const hostelsData = (items) => {
   return newArr;
 }
 const item = 10;
-
 // eslint-disable-next-line no-console
 console.log(hostelsData(item));
 
