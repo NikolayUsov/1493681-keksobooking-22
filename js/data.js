@@ -1,3 +1,10 @@
+import {
+  getRandomIntegerInRange,
+  getRandomFloatInRange,
+  getRandomArrElement,
+  getRandomUniqueArr
+} from './util.js';
+
 export const TITLE_OF_HOTEL = [
   'Аппарт дворец в Геленджике',
   'Moscow Inn',
@@ -10,18 +17,18 @@ export const TITLE_OF_HOTEL = [
   'Blue rooms',
 ];
 
-export const TYPE_OF_HOTEL = ['palace', 'flat', 'house', 'bungalow'];
-export const TIME_OF_CHECKIN = ['12:00', '13:00','14:00'];
-export const TIME_OF_CHECKOUT = ['12:00','13:00',' 14:00'];
-export const FEATURES_OF_HOTEL = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
+const TYPE_OF_HOTEL = ['palace', 'flat', 'house', 'bungalow'];
+const TIME_OF_CHECKIN = ['12:00', '13:00','14:00'];
+const TIME_OF_CHECKOUT = ['12:00','13:00',' 14:00'];
+const FEATURES_OF_HOTEL = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
 
-export const PHOTO_OF_HOTEL = [
+const PHOTO_OF_HOTEL = [
   'http://o0.github.io/assets/images/tokyo/hotel1.jpg',
   'http://o0.github.io/assets/images/tokyo/hotel2.jpg',
   'http://o0.github.io/assets/images/tokyo/hotel3.jpg',
 ];
 
-export const INTRO = [
+const INTRO = [
   'Это изумительное ',
   'Это раскошное ',
   'Это потрясающее ',
@@ -31,7 +38,7 @@ export const INTRO = [
   'Это королевское',
 ];
 
-export const FEATURES = [
+const FEATURES = [
   'c кондиционером',
   ' с wi-fi',
   'c слифтом',
@@ -39,7 +46,7 @@ export const FEATURES = [
   'c душем',
 ];
 
-export const TAGLINE = [
+const TAGLINE = [
   'доведут тебя к мечтам',
   'исполнит твои желания',
   'заставит забыть все невзгоды',
@@ -48,3 +55,45 @@ export const TAGLINE = [
   'наполнит отдых заботой',
   'вознесет тебя до небес',
 ];
+
+
+const createRandomDescription = (element = 'место') => {
+  return `${getRandomArrElement(INTRO)} ${element} ${getRandomArrElement(FEATURES)} ${getRandomArrElement(TAGLINE)}`;
+}
+
+const createHotel = () => {
+  const locationX = getRandomFloatInRange(35.65000, 35.70000, 5);
+  const locationY = getRandomFloatInRange(139.70000, 139.80000, 5);
+
+  return {
+    author: {
+      avatar: `img/avatars/user0${getRandomIntegerInRange(1, 8)}.png`,
+    },
+    offer: {
+      title: getRandomArrElement(TITLE_OF_HOTEL),
+      address: `${locationX} ${locationY}`,
+      price: getRandomIntegerInRange(0, 100000),
+      type: getRandomArrElement(TYPE_OF_HOTEL),
+      rooms: getRandomIntegerInRange(1, 10),
+      guests: getRandomIntegerInRange(1, 24),
+      checkin: getRandomArrElement(TIME_OF_CHECKIN),
+      checkout: getRandomArrElement(TIME_OF_CHECKOUT),
+      features: getRandomUniqueArr(FEATURES_OF_HOTEL),
+      description: createRandomDescription(),
+      photos: getRandomUniqueArr(PHOTO_OF_HOTEL),
+    },
+    location: {
+      x: locationX,
+      y: locationY,
+    },
+  };
+}
+
+export const createHostelsData = (items = 10) => {
+  const  newArr = [];
+  for (let i = 1; i <= items; i++) {
+    newArr.push(createHotel());
+  }
+
+  return newArr;
+}
