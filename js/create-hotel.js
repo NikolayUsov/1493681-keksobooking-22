@@ -1,11 +1,27 @@
-import {TITLE_OF_HOTEL,TYPE_OF_HOTEL,TIME_OF_CHECKIN,TIME_OF_CHECKOUT,FEATURES_OF_HOTEL,PHOTO_OF_HOTEL,INTRO,FEATURES,TAGLINE} from './data-for-hostel.js';
-import {getRandomIntegerInRange,getRandomFloatInRange, getRandomArrElement, getRandomUniqueArr,getRandomArr} from './util.js';
+import {
+  TITLE_OF_HOTEL,
+  TYPE_OF_HOTEL,
+  TIME_OF_CHECKIN,
+  TIME_OF_CHECKOUT,
+  FEATURES_OF_HOTEL,
+  PHOTO_OF_HOTEL,
+  INTRO,
+  FEATURES,
+  TAGLINE
+} from './data.js';
 
-function createRandomDescription(element = 'место') {
+import {
+  getRandomIntegerInRange,
+  getRandomFloatInRange,
+  getRandomArrElement,
+  getRandomUniqueArr
+} from './util.js';
+
+const createRandomDescription = (element = 'место') => {
   return `${getRandomArrElement(INTRO)} ${element} ${getRandomArrElement(FEATURES)} ${getRandomArrElement(TAGLINE)}`;
 }
 
-function createHotel() {
+const createHotel = () => {
   const locationX = getRandomFloatInRange(35.65000, 35.70000, 5);
   const locationY = getRandomFloatInRange(139.70000, 139.80000, 5);
 
@@ -24,7 +40,7 @@ function createHotel() {
       checkout: getRandomArrElement(TIME_OF_CHECKOUT),
       features: getRandomUniqueArr(FEATURES_OF_HOTEL),
       description: createRandomDescription(),
-      photos: getRandomArr(PHOTO_OF_HOTEL),
+      photos: getRandomUniqueArr(PHOTO_OF_HOTEL),
     },
     location: {
       x: locationX,

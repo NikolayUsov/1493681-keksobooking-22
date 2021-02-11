@@ -29,12 +29,12 @@ export const getRandomArrElement = (arr) => arr[getRandomIntegerInRange(0, arr.l
 
 export const getRandomUniqueArr = (arr) => {
   const uniqueArr = [];
-  const uniqueLength = getRandomIntegerInRange(1, arr.length - 1);
+  const uniqueLength = getRandomIntegerInRange(0, arr.length);
 
-  for(let i = 0; i < uniqueLength; i++) {
+  for (let i = 0; i < uniqueLength; i++) {
     let elem = arr[getRandomIntegerInRange(0, arr.length - 1)];
 
-    if(!uniqueArr.includes(elem)){
+    if (!uniqueArr.includes(elem)){
       uniqueArr.push(elem);
     }
   }
@@ -42,13 +42,3 @@ export const getRandomUniqueArr = (arr) => {
   return uniqueArr;
 }
 
-export const getRandomArr = (arr) => {
-  const randomLength = getRandomIntegerInRange(1, 10);
-  const newArr = [];
-
-  for(let i = 0; i < randomLength; i++) {
-    newArr.push(getRandomArrElement(arr))
-  }
-
-  return newArr;
-}
