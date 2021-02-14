@@ -55,8 +55,8 @@ export const createHostelCardElement = (hostel) => {
     photoOfHostel.src = elem;
     hostelPhotoContainer.appendChild(photoOfHostel);
 
-    mapCanvas.append(hostelCard);
+
   })
 
-
+  mapCanvas.appendChild(hostelCard);
 }
