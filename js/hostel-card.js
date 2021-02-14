@@ -1,3 +1,5 @@
+import {sklonenie} from './util.js'
+
 const typeTranslete =  {
   palace: 'Дворец',
   flat: 'Квартира',
@@ -40,7 +42,7 @@ export const createHostelCardElement = (hostel) => {
   hostelCard.querySelector('.popup__text--address').textContent = hostel.offer.address;
   hostelCard.querySelector('.popup__text--price').innerHTML = `${hostel.offer.price} <span>₽/ночь</span`;
   hostelCard.querySelector('.popup__type').textContent = typeTranslete[hostel.offer.type];
-  hostelCard.querySelector('.popup__text--capacity').textContent = `${hostel.offer.rooms} комнаты для ${hostel.offer.guests} гостей`;
+  hostelCard.querySelector('.popup__text--capacity').textContent = `${hostel.offer.rooms} ${sklonenie(hostel.offer.rooms, ['комната', 'комнаты','комнтат'])} для ${hostel.offer.guests} ${sklonenie(hostel.offer.guests, ['гостя', 'гостей','гостей'])}`;
   hostelCard.querySelector('.popup__text--time').textContent = `Заезд после ${hostel.offer.checkin}, выезд до ${hostel.offer.checkout}`;
   hostelCard.querySelector('.popup__description').textContent = hostel.offer.description;
 
