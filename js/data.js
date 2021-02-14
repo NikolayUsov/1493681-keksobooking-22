@@ -61,7 +61,7 @@ const createRandomDescription = (element = 'место') => {
   return `${getRandomArrElement(INTRO)} ${element} ${getRandomArrElement(FEATURES)} ${getRandomArrElement(TAGLINE)}`;
 }
 
-export const createHotel = () => {
+export const createHostelData = () => {
   const locationX = getRandomFloatInRange(35.65000, 35.70000, 5);
   const locationY = getRandomFloatInRange(139.70000, 139.80000, 5);
 
@@ -92,7 +92,7 @@ export const createHotel = () => {
 export const createHostelsData = (items = 10) => {
   const  newArr = [];
   for (let i = 1; i <= items; i++) {
-    newArr.push(createHotel());
+    newArr.push(createHostelData());
   }
 
   return newArr;
