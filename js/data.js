@@ -26,6 +26,9 @@ const PHOTO_OF_HOTEL = [
   'http://o0.github.io/assets/images/tokyo/hotel1.jpg',
   'http://o0.github.io/assets/images/tokyo/hotel2.jpg',
   'http://o0.github.io/assets/images/tokyo/hotel3.jpg',
+  'http://o0.github.io/assets/images/tokyo/hotel1.jpg',
+  'http://o0.github.io/assets/images/tokyo/hotel2.jpg',
+  'http://o0.github.io/assets/images/tokyo/hotel3.jpg',
 ];
 
 const INTRO = [
@@ -97,3 +100,4 @@ export const createHostelsData = (items = 10) => {
 
   return newArr;
 }
+
