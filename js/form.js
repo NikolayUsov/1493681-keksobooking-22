@@ -3,7 +3,7 @@ const MIN_PRICE_OF_TYPE = {
   flat: '1000',
   house: '5000',
   bungalow: '0',
-}
+};
 
 const form = document.querySelector('.ad-form')
 const selectType = form.querySelector('#type');
@@ -23,4 +23,4 @@ selectType.addEventListener('change', function () {
 
 inputCheckIn.addEventListener('change', function () {
   inputCheckOut.value = this.value;
-})
+});
