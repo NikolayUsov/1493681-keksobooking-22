@@ -1,5 +1,10 @@
-import {createHostelsData} from './data.js';
+import { createHostelsData } from './data.js';
+import { createHostelCardElement } from './hostel-card.js';
+const mapCanvas = document.querySelector('.map__canvas');
 
-// eslint-disable-next-line no-console
-console.log(createHostelsData());
+let hostels = createHostelsData();
+
+let hostelCard = createHostelCardElement(hostels[0]);
+
+mapCanvas.appendChild(hostelCard);
 
