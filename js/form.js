@@ -8,25 +8,23 @@ const MIN_PRICE_OF_TYPE = {
 const form = document.querySelector('.ad-form')
 const selectType = form.querySelector('#type');
 const inputPrice = form.querySelector('#price')
-const inputCheckIn = form.querySelector('#timein');
-const inputCheckOut = form.querySelector('#timeout');
+const selectCheckIn = form.querySelector('#timein');
+const selectCheckOut = form.querySelector('#timeout');
 
-const selectedOption  = selectType.options[selectType.selectedIndex];
+//const syncSelectValue = (targetValue, value) => targetValue = value;
 
-inputPrice.setAttribute('placeholder', MIN_PRICE_OF_TYPE[selectedOption.value]);
-inputPrice.setAttribute('min', MIN_PRICE_OF_TYPE[selectedOption.value]);
+inputPrice.placeholder = MIN_PRICE_OF_TYPE[selectType.value];
+inputPrice.setAttribute('min', MIN_PRICE_OF_TYPE[selectType.value]);
 
-selectType.addEventListener('change', function (evt) {
-  // eslint-disable-next-line no-console
-  console.log(evt.target.value);
-  inputPrice.setAttribute('placeholder', MIN_PRICE_OF_TYPE[evt.target.value]);
+selectType.addEventListener('change', (evt) => {
+  inputPrice.placeholder = MIN_PRICE_OF_TYPE[selectType.value];
   inputPrice.setAttribute('min', MIN_PRICE_OF_TYPE[evt.target.value]);
 });
 
-inputCheckOut.addEventListener('change', function (evt) {
-  inputCheckIn.value = evt.target.value;
+selectCheckOut.addEventListener('change', (evt) => {
+  selectCheckIn.value = evt.target.value
 });
 
-inputCheckIn.addEventListener('change', function (evt) {
-  inputCheckOut.value = evt.target.value;
+selectCheckIn.addEventListener('change', (evt) => {
+  selectCheckOut.value = evt.target.value;
 });
