@@ -16,11 +16,13 @@ const selectedOption  = selectType.options[selectType.selectedIndex];
 inputPrice.setAttribute('placeholder', MIN_PRICE_OF_TYPE[selectedOption.value]);
 inputPrice.setAttribute('min', MIN_PRICE_OF_TYPE[selectedOption.value]);
 
-selectType.addEventListener('change', function () {
-  inputPrice.setAttribute('placeholder', MIN_PRICE_OF_TYPE[this.value]);
-  inputPrice.setAttribute('min', MIN_PRICE_OF_TYPE[this.value]);
+selectType.addEventListener('change', function (evt) {
+  // eslint-disable-next-line no-console
+  console.log(evt.target.value);
+  inputPrice.setAttribute('placeholder', MIN_PRICE_OF_TYPE[evt.target.value]);
+  inputPrice.setAttribute('min', MIN_PRICE_OF_TYPE[evt.target.value]);
 });
 
-inputCheckIn.addEventListener('change', function () {
-  inputCheckOut.value = this.value;
+inputCheckOut.addEventListener('change', function (evt) {
+  inputCheckIn.value = evt.target.value;
 });
