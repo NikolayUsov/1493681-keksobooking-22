@@ -26,3 +26,7 @@ selectType.addEventListener('change', function (evt) {
 inputCheckOut.addEventListener('change', function (evt) {
   inputCheckIn.value = evt.target.value;
 });
+
+inputCheckIn.addEventListener('change', function (evt) {
+  inputCheckOut.value = evt.target.value;
+});
