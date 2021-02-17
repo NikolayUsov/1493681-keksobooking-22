@@ -16,7 +16,7 @@ const onSelectChange = (evt) => {
   selectCheckOut.value = evt.target.value;
 }
 
-const setAtributeOfPrice = () => {
+const setPropertiesOfPrice = () => {
   inputPrice.placeholder = minPriceOfType[selectType.value];
   inputPrice.min =  minPriceOfType[selectType.value];
 };
@@ -25,7 +25,7 @@ selectCheckIn.addEventListener('change', onSelectChange);
 
 selectCheckOut.addEventListener('change', onSelectChange);
 
-setAtributeOfPrice();
+setPropertiesOfPrice();
 
-selectType.addEventListener('change', setAtributeOfPrice);
+selectType.addEventListener('change', setPropertiesOfPrice);
 
