@@ -1,4 +1,4 @@
-const MIN_PRICE_OF_TYPE = {
+const minPriceOfType = {
   palace: '10000',
   flat: '1000',
   house: '5000',
@@ -17,8 +17,8 @@ const onSelectChange = (evt) => {
 }
 
 const setAtributeOfPrice = () => {
-  inputPrice.placeholder = MIN_PRICE_OF_TYPE[selectType.value];
-  inputPrice.min =  MIN_PRICE_OF_TYPE[selectType.value];
+  inputPrice.placeholder = minPriceOfType[selectType.value];
+  inputPrice.min =  minPriceOfType[selectType.value];
 };
 
 selectCheckIn.addEventListener('change', onSelectChange);
