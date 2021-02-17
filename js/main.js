@@ -1,6 +1,9 @@
 import { createHostelsData } from './data.js';
 import { createHostelCardElement } from './hostel-card.js';
+import './form.js';
+
 const mapCanvas = document.querySelector('.map__canvas');
+
 
 let hostels = createHostelsData();
 
