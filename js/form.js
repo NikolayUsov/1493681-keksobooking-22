@@ -11,7 +11,21 @@ const inputPrice = form.querySelector('#price')
 const selectCheckIn = form.querySelector('#timein');
 const selectCheckOut = form.querySelector('#timeout');
 
-//const syncSelectValue = (targetValue, value) => targetValue = value;
+/* const syncSelectValue = (destination,  source) => {
+  source.addEventListener('change', (evt) => {
+    destination.value = evt.target.value
+  });
+}; */
+
+const sync = (destinationt, evt) => destinationt.value = evt.target.value;
+
+selectCheckIn.addEventListener('change', (evt) => {
+  sync(selectCheckOut,evt)
+});
+
+selectCheckOut.addEventListener('change', (evt) => {
+  sync(selectCheckIn,evt)
+});
 
 inputPrice.placeholder = MIN_PRICE_OF_TYPE[selectType.value];
 inputPrice.setAttribute('min', MIN_PRICE_OF_TYPE[selectType.value]);
@@ -21,10 +35,6 @@ selectType.addEventListener('change', (evt) => {
   inputPrice.setAttribute('min', MIN_PRICE_OF_TYPE[evt.target.value]);
 });
 
-selectCheckOut.addEventListener('change', (evt) => {
-  selectCheckIn.value = evt.target.value
-});
+/* syncSelectValue(selectCheckIn,selectCheckOut);
+syncSelectValue(selectCheckOut,selectCheckIn); */
 
-selectCheckIn.addEventListener('change', (evt) => {
-  selectCheckOut.value = evt.target.value;
-});
