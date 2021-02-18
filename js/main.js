@@ -1,13 +1,13 @@
 import { createHostelsData } from './data.js';
-import { createHostelCardElement } from './hostel-card.js';
+//import { createHostelCardElement } from './hostel-card.js';
 import './form.js';
+import './map.js';
 
-const mapCanvas = document.querySelector('.map__canvas');
 
-
+// eslint-disable-next-line no-unused-vars
 let hostels = createHostelsData();
 
-let hostelCard = createHostelCardElement(hostels[0]);
 
-mapCanvas.appendChild(hostelCard);
+
+
 
