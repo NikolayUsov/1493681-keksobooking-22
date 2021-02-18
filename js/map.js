@@ -1,17 +1,24 @@
 /* global L:readonly */
 import {isPageActive} from './check-status-page.js';
 import {createHostelCardElement} from './hostel-card.js'
+const defaultLocation = {
+  x: 35.68240,
+  y: 139.75176,
+};
+
+const PATH_TO_MAIN_PIN = '../img/main-pin.svg';
+const PATH_TO_MARKER = '../img/pin.svg';
 
 let statusPage = false;
-
 const map = L.map('map-canvas')
   .on('load', () => {
     statusPage = true;
   })
+
   .setView({
-    lat: 35.65000,
-    lng: 139.70000,
-  }, 10);
+    lat: defaultLocation.x,
+    lng: defaultLocation.y,
+  }, 13);
 
 L.tileLayer(
   'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -20,22 +27,22 @@ L.tileLayer(
   },
 ).addTo(map);
 
-export const createSearchMarker = () =>{
+export const createSearchMarker = () => {
   const mainIcon = L.icon(
     {
-      iconUrl: '../img/main-pin.svg',
-      iconSize: [40,40],
+      iconUrl: PATH_TO_MAIN_PIN,
+      iconSize: [40, 40],
       iconAnchor: [20, 40],
     },
   );
 
   const marker = L.marker(
     {
-      lat: 35.65000,
-      lng: 139.70000,
+      lat: defaultLocation.x,
+      lng: defaultLocation.y,
     },
     {
-      draggable:true,
+      draggable: true,
       icon: mainIcon,
     },
   );
@@ -44,12 +51,12 @@ export const createSearchMarker = () =>{
   return marker;
 }
 
-export const createMarker = (hostel) =>{
+export const createMarker = (hostel) => {
 
   const mainIcon = L.icon(
     {
-      iconUrl: '../img/pin.svg',
-      iconSize: [40,40],
+      iconUrl: PATH_TO_MARKER,
+      iconSize: [40, 40],
       iconAnchor: [20, 40],
     },
   );
@@ -64,7 +71,7 @@ export const createMarker = (hostel) =>{
     },
   );
   marker.addTo(map);
-  marker.bindPopup (createHostelCardElement(hostel))
+  marker.bindPopup (createHostelCardElement(hostel));
 }
 
 isPageActive(statusPage)
