@@ -8,6 +8,5 @@ import {createMarker} from './map.js'
 export let hostels = createHostelsData();
 
 hostels.forEach((hostel) => createMarker(hostel));
-// eslint-disable-next-line no-console
-console.log(hostels);
+
 

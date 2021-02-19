@@ -1,7 +1,5 @@
 export const getRandomRange = (min, max) => {
   if (min < 0 || max < 0) {
-    // eslint-disable-next-line no-console
-    console.log('Отрицательных значений функция не принимает');
 
     return;
   }

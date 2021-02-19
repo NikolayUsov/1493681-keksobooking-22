@@ -7,12 +7,19 @@ const minPriceOfType = {
   bungalow: '0',
 };
 
+const titleLength = {
+  min: 30,
+  max: 100,
+};
+
 const form = document.querySelector('.ad-form')
 const selectType = form.querySelector('#type');
 const inputPrice = form.querySelector('#price')
 const selectCheckIn = form.querySelector('#timein');
 const selectCheckOut = form.querySelector('#timeout');
 const inputAdress = form.querySelector('#address')
+const inputTitle = form.querySelector('#title')
+
 const adressMarker = createSearchMarker();
 
 const onMarkerSetProperties = () => {
@@ -40,3 +47,19 @@ selectCheckOut.addEventListener('change', onSelectChange);
 
 setPropertiesOfPrice();
 selectType.addEventListener('change', () => setPropertiesOfPrice());
+
+//form-validation
+
+inputTitle.addEventListener('change', (evt) => {
+  const evtTitleLength = evt.target.value.length ;
+
+  if (evtTitleLength < titleLength.min) {
+    evt.target.setCustomValidity(`Введите еще  ${titleLength.min - evtTitleLength} сим.`)
+
+  } else if (evtTitleLength > titleLength.max) {
+    evt.target.setCustomValidity(`Слишком длинное название удалите:  ${evtTitleLength - titleLength.max} сим.`);
+  } else {
+    evt.target.setCustomValidity('')
+  }
+  evt.target.reportValidity();
+})
