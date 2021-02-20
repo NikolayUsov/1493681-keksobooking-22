@@ -13,10 +13,10 @@ const inputPrice = form.querySelector('#price')
 const selectCheckIn = form.querySelector('#timein');
 const selectCheckOut = form.querySelector('#timeout');
 const inputAdress = form.querySelector('#address')
-const adressMarker = createSearchMarker();
+const addressMarker = createSearchMarker();
 
 const onMarkerSetProperties = () => {
-  const  adress = adressMarker.getLatLng();
+  const  adress = addressMarker.getLatLng();
   inputAdress.value = `${adress.lat.toFixed(5)} ${adress.lng.toFixed(5)}`;
 };
 
@@ -28,15 +28,18 @@ const onSelectChange = (evt) => {
 
 const setPropertiesOfPrice = () => {
   inputPrice.placeholder = minPriceOfType[selectType.value];
-  inputPrice.min =  minPriceOfType[selectType.value];
+  inputPrice.min = minPriceOfType[selectType.value];
 };
 
-inputAdress.addEventListener('focus', (evt) => evt.target.disabled = true);
+inputAdress.readOnly = true;
+
+addressMarker.on('move', onMarkerSetProperties);
 onMarkerSetProperties();
-adressMarker.on('move', onMarkerSetProperties);
 
 selectCheckIn.addEventListener('change', onSelectChange);
 selectCheckOut.addEventListener('change', onSelectChange);
+selectType.addEventListener('change', () => setPropertiesOfPrice());
+
 
 setPropertiesOfPrice();
-selectType.addEventListener('change', () => setPropertiesOfPrice());
+

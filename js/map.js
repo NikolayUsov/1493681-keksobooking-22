@@ -1,51 +1,61 @@
 /* global L:readonly */
-import {isPageActive} from './check-status-page.js';
-import {createHostelCardElement} from './hostel-card.js'
-const defaultLocation = {
-  x: 35.68240,
-  y: 139.75176,
+import {togglePageStaus} from './status-page.js';
+import {createHostelCardElement} from './hostel-card.js';
+
+const DefaultLocation = {
+  X: 35.68240,
+  Y: 139.75176,
 };
 
-const PATH_TO_MAIN_PIN = '../img/main-pin.svg';
-const PATH_TO_MARKER = '../img/pin.svg';
+const LeafletProperties = {
+  PATH_TO_MAIN_PIN: '../img/main-pin.svg',
+  PATH_TO_MARKER: '../img/pin.svg',
+  ICON_SIZE: 40,
+  TITLE_LAYER: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+  ATTRIBUTION: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+};
 
-let statusPage = false;
+const MAP_ZOOM = 13;
+
+togglePageStaus(false);
+
 const map = L.map('map-canvas')
   .on('load', () => {
-    statusPage = true;
+    togglePageStaus(true);
   })
 
   .setView({
-    lat: defaultLocation.x,
-    lng: defaultLocation.y,
-  }, 13);
+    lat: DefaultLocation.X,
+    lng: DefaultLocation.Y,
+  }, MAP_ZOOM);
 
 L.tileLayer(
-  'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+  LeafletProperties.TITLE_LAYER,
   {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    attribution: LeafletProperties.ATTRIBUTION,
   },
 ).addTo(map);
 
 export const createSearchMarker = () => {
   const mainIcon = L.icon(
     {
-      iconUrl: PATH_TO_MAIN_PIN,
-      iconSize: [40, 40],
-      iconAnchor: [20, 40],
+      iconUrl: LeafletProperties.PATH_TO_MAIN_PIN,
+      iconSize: [LeafletProperties.ICON_SIZE, LeafletProperties.ICON_SIZE],
+      iconAnchor: [LeafletProperties.ICON_SIZE/2, LeafletProperties.ICON_SIZE],
     },
   );
 
   const marker = L.marker(
     {
-      lat: defaultLocation.x,
-      lng: defaultLocation.y,
+      lat: DefaultLocation.X,
+      lng: DefaultLocation.Y,
     },
     {
       draggable: true,
       icon: mainIcon,
     },
   );
+
   marker.addTo(map);
 
   return marker;
@@ -55,9 +65,9 @@ export const createMarker = (hostel) => {
 
   const mainIcon = L.icon(
     {
-      iconUrl: PATH_TO_MARKER,
-      iconSize: [40, 40],
-      iconAnchor: [20, 40],
+      iconUrl: LeafletProperties.PATH_TO_MARKER,
+      iconSize: [LeafletProperties.ICON_SIZE, LeafletProperties.ICON_SIZE],
+      iconAnchor: [LeafletProperties.ICON_SIZE/2, LeafletProperties.ICON_SIZE],
     },
   );
 
@@ -70,8 +80,13 @@ export const createMarker = (hostel) => {
       icon: mainIcon,
     },
   );
+
   marker.addTo(map);
-  marker.bindPopup (createHostelCardElement(hostel));
+  marker.bindPopup(createHostelCardElement(hostel));
 }
 
-isPageActive(statusPage)
+export const renderMarkers = (data) => {
+  data.forEach((elem) => {
+    createMarker(elem);
+  })
+}
