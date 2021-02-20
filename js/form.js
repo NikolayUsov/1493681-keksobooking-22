@@ -19,7 +19,8 @@ const selectCheckIn = form.querySelector('#timein');
 const selectCheckOut = form.querySelector('#timeout');
 const inputAdress = form.querySelector('#address')
 const inputTitle = form.querySelector('#title')
-
+const selectRoomNumber = form.querySelector('#room_number');
+const selectGuests = form.querySelector('#capacity');
 const adressMarker = createSearchMarker();
 
 const onMarkerSetProperties = () => {
@@ -48,6 +49,17 @@ selectCheckOut.addEventListener('change', onSelectChange);
 setPropertiesOfPrice();
 selectType.addEventListener('change', () => setPropertiesOfPrice());
 
+selectRoomNumber.addEventListener('change', (evt) => {
+  //const roomsOptions = evt.target.children;
+  //const guestOptions = selectGuests.children;
+  let guestElements = selectGuests.children;
+  let guestsArray = (Array.from(guestElements));
+  guestsArray.forEach((elem) => {
+    if(evt.target.value < elem.value) {
+      elem.disabled = true;
+    }
+  })
+});
 //form-validation
 
 inputTitle.addEventListener('change', (evt) => {
@@ -60,6 +72,17 @@ inputTitle.addEventListener('change', (evt) => {
     evt.target.setCustomValidity(`Слишком длинное название удалите:  ${evtTitleLength - titleLength.max} сим.`);
   } else {
     evt.target.setCustomValidity('')
+  }
+  evt.target.reportValidity();
+})
+
+inputPrice.addEventListener('input', (evt) => {
+  if (evt.target.validity.rangeOverflow) {
+    evt.target.setCustomValidity (`Стоимость не должна быть больше ${evt.target.max}`)
+  } else if (evt.target.validity.rangeUnderflow) {
+    // eslint-disable-next-line no-console
+    console.log(evt.target.min)
+    evt.target.setCustomValidity (`${evt.target.min} Стоимость не должна быть меньше ${evt.target.min}`)
   }
   evt.target.reportValidity();
 })
