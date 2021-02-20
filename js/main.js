@@ -1,13 +1,7 @@
 import { createHostelsData } from './data.js';
-import { createHostelCardElement } from './hostel-card.js';
 import './form.js';
+import {renderMarkers} from './map.js'
 
-const mapCanvas = document.querySelector('.map__canvas');
+renderMarkers(createHostelsData())
 
-
-let hostels = createHostelsData();
-
-let hostelCard = createHostelCardElement(hostels[0]);
-
-mapCanvas.appendChild(hostelCard);
 
