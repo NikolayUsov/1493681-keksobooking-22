@@ -1,5 +1,5 @@
 import {createSearchMarker} from './map.js'
-
+import {togglePageStatus} from './status-page.js'
 const minPriceOfType = {
   palace: '10000',
   flat: '1000',
@@ -12,6 +12,7 @@ const titleLength = {
   max: 100,
 };
 
+const main =document.querySelector('main');
 const form = document.querySelector('.ad-form')
 const selectType = form.querySelector('#type');
 const inputPrice = form.querySelector('#price')
@@ -21,6 +22,8 @@ const inputAdress = form.querySelector('#address')
 const inputTitle = form.querySelector('#title')
 const selectRoomNumber = form.querySelector('#room_number');
 const selectGuests = form.querySelector('#capacity');
+
+const successTemplate = document.querySelector('#success').content.querySelector('.success');
 const addressMarker = createSearchMarker();
 
 const onMarkerSetProperties = () => {
@@ -78,6 +81,16 @@ selectRoomNumber.addEventListener('change', (evt) => {
 
 
 //form-validation
+
+form.addEventListener('submit', (evt) => {
+  evt.preventDefault();
+  let successMeassge =  successTemplate.cloneNode(true);
+  main.appendChild(successMeassge);
+  window.addEventListener('click', () => {
+    successMeassge.remove();
+  })
+  togglePageStatus(false)
+});
 
 inputTitle.addEventListener('change', (evt) => {
   const evtTitleLength = evt.target.value.length ;

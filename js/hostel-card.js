@@ -1,5 +1,9 @@
-import {declination} from './util.js'
-import {WORD_DECLINATION} from './libary.js'
+import {declination} from './util.js';
+
+const WORD_DECLINATION = {
+  room : ['комната', 'комнаты', 'комнат'],
+  guest: ['гостя', 'гостей', 'гостей'],
+};
 
 const typeTranslate =  {
   palace: 'Дворец',
