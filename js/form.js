@@ -1,6 +1,9 @@
 import {createSearchMarker} from './map.js';
 import {togglePageStatus} from './status-page.js';
 
+const MAX_GUESTS_VALUE = 100;
+const MAX_ROOMS_VALUE = 0;
+
 const minPriceOfType = {
   palace: '10000',
   flat: '1000',
@@ -42,7 +45,7 @@ const onInputTitleChange = (evt) => {
   evt.target.reportValidity();
 }
 
-const onInputPriceInput = (evt) => {
+const onPriceInput = (evt) => {
   if (evt.target.validity.rangeOverflow) {
     evt.target.setCustomValidity (`Стоимость не должна быть больше ${evt.target.max}`)
   } else if (evt.target.validity.rangeUnderflow) {
@@ -58,7 +61,7 @@ const onSelectChange = (evt) => {
   selectCheckOut.value = evt.target.value;
 }
 
-const setPropertiesOfPrice = () => {
+const onTypeInputChange = () => {
   inputPrice.placeholder = minPriceOfType[selectType.value];
   inputPrice.min = minPriceOfType[selectType.value];
 };
@@ -66,20 +69,20 @@ const setPropertiesOfPrice = () => {
 const onSelectRoomsChange = () => {
   const guestOptions = selectGuests.children;
   const guestElements = selectGuests.children;
-  const guestsArray = (Array.from(guestElements));
+  const guestsArray = Array.from(guestElements);
 
-  +selectRoomNumber.value  === 0 ? selectGuests.value = 100  : selectGuests.value = selectRoomNumber.value;
+  +selectRoomNumber.value === MAX_ROOMS_VALUE ? selectGuests.value = MAX_GUESTS_VALUE  : selectGuests.value = selectRoomNumber.value;
 
-  for (let guest of guestOptions) {
+  for (const guest of guestOptions) {
     guest.style.display = 'block';
   }
 
   guestsArray.forEach((elem) => {
-    if(+selectRoomNumber.value < +elem.value) {
+    if (+ selectRoomNumber.value < +elem.value) {
       elem.style.display = 'none';
     }
 
-    if (+selectRoomNumber.value ===0 && + elem.value === 100) {
+    if (+selectRoomNumber.value === MAX_ROOMS_VALUE && +elem.value === MAX_GUESTS_VALUE) {
       elem.style.display = 'block';
     }
   })
@@ -91,10 +94,10 @@ const onFormSubmit = (evt) => {
 };
 
 inputTitle.addEventListener('change', onInputTitleChange);
-inputPrice.addEventListener('input', onInputPriceInput );
+inputPrice.addEventListener('input', onPriceInput);
 selectCheckIn.addEventListener('change', onSelectChange);
 selectCheckOut.addEventListener('change', onSelectChange);
-selectType.addEventListener('change', setPropertiesOfPrice);
+selectType.addEventListener('change', onTypeInputChange);
 selectRoomNumber.addEventListener('change', onSelectRoomsChange);
 form.addEventListener('submit', onFormSubmit);
 
@@ -102,6 +105,6 @@ const addressMarker = createSearchMarker();
 addressMarker.on('move', onMarkerMove);
 inputAddress.readOnly = true;
 onMarkerMove();
-setPropertiesOfPrice();
+onTypeInputChange();
 onSelectRoomsChange();
 
