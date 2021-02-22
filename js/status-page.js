@@ -16,7 +16,7 @@ const toggleFormStatus = (form, formClass, status) => {
   }
 }
 
-export const togglePageStaus = (status) => {
+export const togglePageStatus = (status) => {
   const form = document.querySelector('.ad-form');
   const formMapFilter = document.querySelector('.map__filters');
   toggleFormStatus(form, 'ad-form', status)
