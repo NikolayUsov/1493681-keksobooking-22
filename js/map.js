@@ -73,8 +73,8 @@ export const createMarker = (hostel) => {
 
   const marker = L.marker(
     {
-      lat: hostel.location.x,
-      lng: hostel.location.y,
+      lat: hostel.location.lat,
+      lng: hostel.location.lng,
     },
     {
       icon: mainIcon,

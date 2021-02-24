@@ -78,7 +78,7 @@ const onSelectRoomsChange = () => {
   }
 
   guestsArray.forEach((elem) => {
-    if (+ selectRoomNumber.value < +elem.value) {
+    if (+selectRoomNumber.value < +elem.value) {
       elem.style.display = 'none';
     }
 
