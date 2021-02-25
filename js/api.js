@@ -18,7 +18,7 @@ const sendData = (onSuccess, onError, data) => {
     .then((response) => {
       if (response.ok) {
         onSuccess()
-      } else {onError()}
+      } else { throw new Error()}
     })
     .catch(() => {
       onError()})
