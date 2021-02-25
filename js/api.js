@@ -1,15 +1,18 @@
-const getData = (onSuccess) => {
-  fetch('https://22.javascript.pages.academy/keksobooking/data')
+const SERVER_URL = 'https://22.javascript.pages.academy/keksobooking';
+
+const getData = (url,onSuccess, onError) => {
+  fetch(url)
     .then((response) => {
       return response.json()
     })
-    .then((jsonData) => {
-      onSuccess(jsonData)
+    .then((data) => {
+      onSuccess(data)
     })
+    .catch(() => onError())
 }
 
 const sendData = (onSuccess, onError, data) => {
-  fetch('https://22.javascript.pages.academy/keksobooking',
+  fetch(SERVER_URL,
     {
       method: 'POST',
       body: data,
@@ -18,7 +21,7 @@ const sendData = (onSuccess, onError, data) => {
     .then((response) => {
       if (response.ok) {
         onSuccess()
-      } else { throw new Error()}
+      } else {throw new Error()}
     })
     .catch(() => {
       onError()})

@@ -1,9 +1,7 @@
 import {createSearchMarker} from './map.js';
-import {isEscEvent} from './util.js'
 import {sendData} from './api.js'
-
-// eslint-disable-next-line no-unused-vars
-import {togglePageStatus} from './status-page.js';
+import {showSuccessMessage,showErrorMessage} from './messages.js'
+import {togglePageStatus} from './status-page.js'
 
 const MAX_GUESTS_VALUE = 100;
 const MAX_ROOMS_VALUE = 0;
@@ -29,35 +27,6 @@ const inputAddress = form.querySelector('#address')
 const inputTitle = form.querySelector('#title')
 const selectRoomNumber = form.querySelector('#room_number');
 const selectGuests = form.querySelector('#capacity');
-
-const openSuccessMessage = () => {
-  const main = document.querySelector('main');
-  const messageTemplate = document.querySelector('#success').content.querySelector('.success');
-  let messageSuccess = messageTemplate.cloneNode(true);
-  main.appendChild(messageSuccess);
-
-  messageSuccess.addEventListener('click', () => messageSuccess.remove())
-  document.addEventListener('keydown', (evt) => {
-    if (isEscEvent(evt)) {
-      messageSuccess.remove()
-    }
-  })
-}
-
-const openErrorMessage = () => {
-  const main = document.querySelector('main');
-  const errorTemplate = document.querySelector('#error').content.querySelector('.error');
-  let messageError = errorTemplate.cloneNode(true);
-  main.appendChild(messageError);
-
-  messageError.addEventListener('click', () => messageError.remove())
-  document.addEventListener('keydown', (evt) => {
-    if (isEscEvent(evt)) {
-      messageError.remove()
-    }
-  })
-}
-
 
 const onMarkerMove = () => {
   const address = addressMarker.getLatLng();
@@ -121,18 +90,16 @@ const onSelectRoomsChange = () => {
   })
 };
 
-const formSuccessSend = () => {
-  openSuccessMessage();
+const sendFormSuccess = () => {
+  showSuccessMessage();
   form.reset();
-}
+  onMarkerMove();
+  togglePageStatus(false);
+};
 
 const onFormSubmit = (evt) => {
   evt.preventDefault();
-  sendData(
-    () => formSuccessSend(),
-    () => openErrorMessage(),
-    new FormData (evt.target),
-  )
+  sendData(sendFormSuccess,showErrorMessage,new FormData (evt.target))
 };
 
 inputTitle.addEventListener('change', onInputTitleChange);

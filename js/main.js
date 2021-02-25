@@ -1,10 +1,13 @@
 //import { createHostelsData } from './data.js';
 import './form.js';
 import {getData} from './api.js'
-import {renderMarkers} from './map.js'
+import {renderMarkers,createNoDataMarker} from './map.js'
 
-getData((data) => {renderMarkers(data)})
+const DATA_URL_DOWNLOAD = 'https://22.javascript.pages.academy/keksobooking/data';
 
-//renderMarkers(createHostelsData())
+const successHandler = (data) =>  renderMarkers(data);
+
+getData(DATA_URL_DOWNLOAD,successHandler,createNoDataMarker)
+
 
 
