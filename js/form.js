@@ -1,7 +1,6 @@
 import {createSearchMarker} from './map.js';
 import {sendData} from './api.js'
 import {showSuccessMessage,showErrorMessage} from './messages.js'
-import {togglePageStatus} from './status-page.js'
 
 const MAX_GUESTS_VALUE = 100;
 const MAX_ROOMS_VALUE = 0;
@@ -95,7 +94,6 @@ const sendFormSuccess = () => {
   showSuccessMessage();
   form.reset();
   onMarkerMove();
-  togglePageStatus(false);
 };
 
 const sendFormError = () => showErrorMessage(SEND_FORM_ERROR_TEXT)
