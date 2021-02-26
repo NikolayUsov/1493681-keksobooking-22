@@ -32,9 +32,10 @@ const showSuccessMessage = () => {
   })
 }
 
-const showErrorMessage = () => {
+const showErrorMessage = (errorText) => {
   const errorTemplate = document.querySelector('#error').content.querySelector('.error');
   const messageError = errorTemplate.cloneNode(true);
+  messageError.querySelector('.error__message').textContent = errorText;
   messageError.style.zIndex = '1000';
   main.appendChild(messageError);
 

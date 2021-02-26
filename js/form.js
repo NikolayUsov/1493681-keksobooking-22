@@ -5,6 +5,7 @@ import {togglePageStatus} from './status-page.js'
 
 const MAX_GUESTS_VALUE = 100;
 const MAX_ROOMS_VALUE = 0;
+const SEND_FORM_ERROR_TEXT = 'Ошибка размещения объявления';
 
 const minPriceOfType = {
   palace: '10000',
@@ -97,9 +98,11 @@ const sendFormSuccess = () => {
   togglePageStatus(false);
 };
 
+const sendFormError = () => showErrorMessage(SEND_FORM_ERROR_TEXT)
+
 const onFormSubmit = (evt) => {
   evt.preventDefault();
-  sendData(sendFormSuccess,showErrorMessage,new FormData (evt.target))
+  sendData(sendFormSuccess,sendFormError,new FormData (evt.target))
 };
 
 inputTitle.addEventListener('change', onInputTitleChange);
