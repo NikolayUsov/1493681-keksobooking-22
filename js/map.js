@@ -1,7 +1,7 @@
 /* global L:readonly */
 import {togglePageStatus} from './status-page.js';
 import {createHostelCardElement} from './hostel-card.js';
-
+//import {filterHostel} from './filter.js'
 const DefaultLocation = {
   X: 35.68240,
   Y: 139.75176,
@@ -86,7 +86,10 @@ export const createMarker = (hostel) => {
 }
 
 export const renderMarkers = (data) => {
-  data.forEach((elem) => {
-    createMarker(elem);
-  })
+  data
+    //.slice()
+    //.filter(filterHostel)
+    .forEach((elem) => {
+      createMarker(elem);
+    })
 }
