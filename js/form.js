@@ -1,4 +1,4 @@
-import {createSearchMarker} from './map.js';
+import {createSearchMarker, returnMap, DefaultLocation} from './map.js';
 import {sendData} from './api.js'
 import {showSuccessMessage,showErrorMessage} from './messages.js'
 
@@ -17,7 +17,7 @@ const TitleLength = {
   MIN: 30,
   MAX: 100,
 };
-
+const addressMarker = createSearchMarker();
 const form = document.querySelector('.ad-form')
 const selectType = form.querySelector('#type');
 const inputPrice = form.querySelector('#price')
@@ -27,12 +27,16 @@ const inputAddress = form.querySelector('#address')
 const inputTitle = form.querySelector('#title')
 const selectRoomNumber = form.querySelector('#room_number');
 const selectGuests = form.querySelector('#capacity');
+const resetButton =form.querySelector('.ad-form__reset');
 
 const onMarkerMove = () => {
   const address = addressMarker.getLatLng();
   inputAddress.value = `${address.lat.toFixed(5)} ${address.lng.toFixed(5)}`;
 };
 
+const resetMarker = () => {
+  addressMarker.setLatLng([DefaultLocation.X,DefaultLocation.Y])
+}
 const onInputTitleChange = (evt) => {
   const title = evt.target.value;
 
@@ -103,6 +107,13 @@ const onFormSubmit = (evt) => {
   sendData(sendFormSuccess,sendFormError,new FormData (evt.target))
 };
 
+const onFormReset = (evt) => {
+  evt.preventDefault();
+  form.reset();
+  returnMap();
+  resetMarker();
+}
+
 inputTitle.addEventListener('change', onInputTitleChange);
 inputPrice.addEventListener('input', onPriceInput);
 selectCheckIn.addEventListener('change', onSelectChange);
@@ -110,8 +121,9 @@ selectCheckOut.addEventListener('change', onSelectChange);
 selectType.addEventListener('change', onTypeInputChange);
 selectRoomNumber.addEventListener('change', onSelectRoomsChange);
 form.addEventListener('submit', onFormSubmit);
+resetButton.addEventListener('click',onFormReset)
 
-const addressMarker = createSearchMarker();
+
 addressMarker.on('move', onMarkerMove);
 inputAddress.readOnly = true;
 onMarkerMove();

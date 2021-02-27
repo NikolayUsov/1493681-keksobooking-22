@@ -1,4 +1,5 @@
 const API_URL = 'https://22.javascript.pages.academy/keksobooking';
+const GET_DATA_ERROR_TEXT = 'Ошибка при загрузке данных';
 
 const getData = (onSuccess, onError) => {
   fetch(`${API_URL}/data`)
@@ -8,7 +9,7 @@ const getData = (onSuccess, onError) => {
     .then((data) => {
       onSuccess(data)
     })
-    .catch(() => onError())
+    .catch(() => onError(GET_DATA_ERROR_TEXT))
 }
 
 const sendData = (onSuccess, onError, data) => {
