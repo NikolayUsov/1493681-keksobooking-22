@@ -1,8 +1,10 @@
-import {createSearchMarker} from './map.js';
-import {togglePageStatus} from './status-page.js';
+import {createSearchMarker, returnMap, DefaultLocation} from './map.js';
+import {sendData} from './api.js'
+import {showSuccessMessage,showErrorMessage} from './messages.js'
 
 const MAX_GUESTS_VALUE = 100;
 const MAX_ROOMS_VALUE = 0;
+const SEND_FORM_ERROR_TEXT = 'Ошибка размещения объявления';
 
 const minPriceOfType = {
   palace: '10000',
@@ -15,7 +17,7 @@ const TitleLength = {
   MIN: 30,
   MAX: 100,
 };
-
+const addressMarker = createSearchMarker();
 const form = document.querySelector('.ad-form')
 const selectType = form.querySelector('#type');
 const inputPrice = form.querySelector('#price')
@@ -25,12 +27,16 @@ const inputAddress = form.querySelector('#address')
 const inputTitle = form.querySelector('#title')
 const selectRoomNumber = form.querySelector('#room_number');
 const selectGuests = form.querySelector('#capacity');
+const resetButton =form.querySelector('.ad-form__reset');
 
 const onMarkerMove = () => {
   const address = addressMarker.getLatLng();
   inputAddress.value = `${address.lat.toFixed(5)} ${address.lng.toFixed(5)}`;
 };
 
+const resetMarker = () => {
+  addressMarker.setLatLng([DefaultLocation.X,DefaultLocation.Y])
+}
 const onInputTitleChange = (evt) => {
   const title = evt.target.value;
 
@@ -78,7 +84,7 @@ const onSelectRoomsChange = () => {
   }
 
   guestsArray.forEach((elem) => {
-    if (+ selectRoomNumber.value < +elem.value) {
+    if (+selectRoomNumber.value < +elem.value) {
       elem.style.display = 'none';
     }
 
@@ -88,10 +94,25 @@ const onSelectRoomsChange = () => {
   })
 };
 
+const sendFormSuccess = () => {
+  showSuccessMessage();
+  form.reset();
+  onMarkerMove();
+};
+
+const sendFormError = () => showErrorMessage(SEND_FORM_ERROR_TEXT)
+
 const onFormSubmit = (evt) => {
   evt.preventDefault();
-  togglePageStatus(false)
+  sendData(sendFormSuccess,sendFormError,new FormData (evt.target))
 };
+
+const onFormReset = (evt) => {
+  evt.preventDefault();
+  form.reset();
+  returnMap();
+  resetMarker();
+}
 
 inputTitle.addEventListener('change', onInputTitleChange);
 inputPrice.addEventListener('input', onPriceInput);
@@ -100,8 +121,9 @@ selectCheckOut.addEventListener('change', onSelectChange);
 selectType.addEventListener('change', onTypeInputChange);
 selectRoomNumber.addEventListener('change', onSelectRoomsChange);
 form.addEventListener('submit', onFormSubmit);
+resetButton.addEventListener('click',onFormReset)
 
-const addressMarker = createSearchMarker();
+
 addressMarker.on('move', onMarkerMove);
 inputAddress.readOnly = true;
 onMarkerMove();

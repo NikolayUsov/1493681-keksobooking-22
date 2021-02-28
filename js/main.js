@@ -1,7 +1,13 @@
-import { createHostelsData } from './data.js';
-import './form.js';
-import {renderMarkers} from './map.js'
 
-renderMarkers(createHostelsData())
+import './form.js';
+import {getData} from './api.js'
+import {renderMarkers} from './map.js'
+import {showErrorMessage} from './messages.js'
+
+
+const successHandler = (data) =>  renderMarkers(data);
+const errorHandler = (message) => showErrorMessage(message)
+
+getData(successHandler,errorHandler)
 
 

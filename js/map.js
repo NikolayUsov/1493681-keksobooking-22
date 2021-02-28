@@ -2,7 +2,7 @@
 import {togglePageStatus} from './status-page.js';
 import {createHostelCardElement} from './hostel-card.js';
 
-const DefaultLocation = {
+export const DefaultLocation = {
   X: 35.68240,
   Y: 139.75176,
 };
@@ -35,6 +35,14 @@ L.tileLayer(
     attribution: LeafletProperties.ATTRIBUTION,
   },
 ).addTo(map);
+
+export const returnMap = () => {
+  map
+    .setView({
+      lat: DefaultLocation.X,
+      lng: DefaultLocation.Y,
+    }, MAP_ZOOM);
+};
 
 export const createSearchMarker = () => {
   const mainIcon = L.icon(
@@ -73,8 +81,8 @@ export const createMarker = (hostel) => {
 
   const marker = L.marker(
     {
-      lat: hostel.location.x,
-      lng: hostel.location.y,
+      lat: hostel.location.lat,
+      lng: hostel.location.lng,
     },
     {
       icon: mainIcon,
