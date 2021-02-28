@@ -1,5 +1,4 @@
 /* eslint-disable no-unused-vars */
-
 const filterForm = document.querySelector('.map__filters');
 const houeType = filterForm.querySelector('#housing-type');
 const housePrice = filterForm.querySelector('#housing-price');
