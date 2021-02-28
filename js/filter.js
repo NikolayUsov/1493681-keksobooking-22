@@ -1,3 +1,5 @@
+import {clearMarkers} from './map.js';
+
 /* eslint-disable no-unused-vars */
 const filterForm = document.querySelector('.map__filters');
 const houeType = filterForm.querySelector('#housing-type');
@@ -55,30 +57,34 @@ const filterHostel = (hostel) => {
     return true
   }
   //если тип жилья не равен типу в фильрах возвращаем ложь
-  if (houeType.value !== type) {
-    return false
+  if (houeType.value === type) {
+    return true
   }
-  // цена фильтра должна быть мень цены хостела
-  /*   if(price < housePrice.value) {
-    eturn false
-  }; */
+
 
   //  количествокомнат должно быть равно
-  if (rooms !== houseRooms.value) {
+  /*  if (rooms !== houseRooms.value) {
     return false;
-  }
+  } */
   // кооличество гостей не должно быть больше чем в карточке товара
-  if (guests <= houseGuests.value) {
+  /*   if (guests <= houseGuests.value) {
     return false;
-  }
+  } */
 
   // сравнить выбранные чекбоксы и карточку
-  compareFeatures(activeFeatures, features)
+  //compareFeatures(activeFeatures, features)
 }
 
-filterForm.addEventListener('change' )
 
 
 houseFeatures.addEventListener('change',getCheckedCheckBoxesValue)
+
+export const startFilter = (cb) => {
+  filterForm.addEventListener('change',() =>{
+    clearMarkers()
+    cb();
+  })
+}
+
 
 export {filterHostel};

@@ -1,11 +1,13 @@
 /* global L:readonly */
 import {togglePageStatus} from './status-page.js';
 import {createHostelCardElement} from './hostel-card.js';
-
+import {filterHostel} from './filter.js';
 export const DefaultLocation = {
   X: 35.68240,
   Y: 139.75176,
 };
+const MAX_HOSTEL_MARKERS = 10;
+const hostelsMarkers = []
 
 const LeafletProperties = {
   PATH_TO_MAIN_PIN: '../img/main-pin.svg',
@@ -88,15 +90,24 @@ export const createMarker = (hostel) => {
       icon: mainIcon,
     },
   );
-
+  hostelsMarkers.push(marker);
   marker.addTo(map);
+  map.addLayer(marker);
   marker.bindPopup(createHostelCardElement(hostel));
+}
+
+
+export const clearMarkers = () => {
+  hostelsMarkers.forEach((elem) => map.removeLayer(elem));
+  hostelsMarkers.splice(0, hostelsMarkers.length)
+  map.closePopup();
 }
 
 export const renderMarkers = (data) => {
   data
-    //.slice()
-    //.filter(filterHostel)
+    .slice()
+    .filter(filterHostel)
+    .slice(0, MAX_HOSTEL_MARKERS)
     .forEach((elem) => {
       createMarker(elem);
     })
