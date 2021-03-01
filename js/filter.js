@@ -75,7 +75,9 @@ const filterHostel = (hostel) => {
   //compareFeatures(activeFeatures, features)
 }
 
-
+const filtredMarkers = (data) => {
+  return data.filter(filterHostel).slice(0,10);
+}
 
 houseFeatures.addEventListener('change',getCheckedCheckBoxesValue)
 
@@ -87,4 +89,4 @@ export const startFilter = (cb) => {
 }
 
 
-export {filterHostel};
+export {filterHostel,filtredMarkers};

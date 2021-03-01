@@ -1,11 +1,12 @@
 /* global L:readonly */
 import {togglePageStatus} from './status-page.js';
 import {createHostelCardElement} from './hostel-card.js';
-import {filterHostel} from './filter.js';
+import {filtredMarkers} from './filter.js';
 export const DefaultLocation = {
   X: 35.68240,
   Y: 139.75176,
 };
+// eslint-disable-next-line no-unused-vars
 const MAX_HOSTEL_MARKERS = 10;
 const hostelsMarkers = []
 
@@ -104,11 +105,9 @@ export const clearMarkers = () => {
 }
 
 export const renderMarkers = (data) => {
-  data
-    .slice()
-    .filter(filterHostel)
-    .slice(0, MAX_HOSTEL_MARKERS)
-    .forEach((elem) => {
+  let markers = filtredMarkers(data);
+  markers.
+    forEach((elem) => {
       createMarker(elem);
     })
 }
