@@ -39,7 +39,7 @@ L.tileLayer(
   },
 ).addTo(map);
 
-export const returnMap = () => {
+export const resetMap = () => {
   map
     .setView({
       lat: DefaultLocation.X,

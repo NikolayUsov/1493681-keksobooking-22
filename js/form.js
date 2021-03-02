@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-import {createSearchMarker, returnMap, DefaultLocation} from './map.js';
+import {createSearchMarker, resetMap, DefaultLocation} from './map.js';
 import {sendData} from './api.js'
 import {showSuccessMessage,showErrorMessage} from './messages.js'
 
@@ -112,7 +112,7 @@ const onFormSubmit = (evt) => {
 const onFormReset = (evt) => {
   evt.preventDefault();
   form.reset();
-  returnMap();
+  resetMap()
   resetMarker();
 }
 
