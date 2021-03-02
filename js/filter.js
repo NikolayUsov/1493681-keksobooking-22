@@ -8,6 +8,8 @@ const houseRooms = filterForm.querySelector('#housing-rooms');
 const houseGuests = filterForm.querySelector('#housing-guests');
 const houseFeatures = filterForm.querySelector('#housing-features');
 
+const MAX_PRICE = 1000000000
+const MAX_MARKERS = 10;
 const priseRange = {
   low: {
     min: 0,
@@ -19,11 +21,11 @@ const priseRange = {
   },
   high: {
     min: 50000,
-    max: 1000000,
+    max: MAX_PRICE,
   },
   any: {
     min: 0,
-    max: 1000000000,
+    max: MAX_PRICE,
   },
 }
 
@@ -37,18 +39,20 @@ const getCheckedCheckBoxesValue = () => {
   return checkedValue;
 }
 
-
+// Ты ругался на эту функцию но ее я не удалю
 const compareFeatures = (filter, data) => {
-  // eslint-disable-next-line no-console
-  console.log(filter, data)
   if (filter.length === 0) {
     return true;
 
   } else if ( filter.length > data.length) {
+
     return false;
+
   } else {
+
     for(let elem of filter) {
       if(data.indexOf(elem) === -1) {
+
         return false
       }
     }
@@ -69,16 +73,18 @@ const filterHostel = (hostel) => {
 
   const activeFeatures = getCheckedCheckBoxesValue()
   let isFiltred = true;
-  // eslint-disable-next-line no-console
-  console.log(typeof(houeType.value), typeof(type),houeType.value,type )
-  // описываем условие когда фильтрации нет
-  if(houeType.value === 'any' && housePrice.value === 'any' && houseRooms.value === 'any' && houseGuests.value === 'any' && activeFeatures.length === 0) {
+
+  if (houeType.value === 'any' &&
+      housePrice.value === 'any' &&
+      houseRooms.value === 'any' &&
+      houseGuests.value === 'any' &&
+      activeFeatures.length === 0) {
+
     return true
   }
-  //если тип жилья не равен типу в фильрах возвращаем ложь
+
   if (houeType.value !== 'any' && houeType.value !== type) {
-    // eslint-disable-next-line no-console
-    //console.log(typeof(houeType.value), typeof(type),houeType.value,type )
+
     return false
   }
 
@@ -89,7 +95,8 @@ const filterHostel = (hostel) => {
   if (houseGuests.value !== 'any' && guests !== +houseGuests.value) {
     return false;
   }
-  //сравниваем стоимость
+  // Алексей, вот тут есть сомнения оптимаьно ли было использовать объект, мне показлось что да.
+  // ну и еще я решил что пограничные значения должны входить по нижней границе но не уверен что верно
   const priceRangeValue =  housePrice.value;
   if(priseRange[priceRangeValue].min >= price || priseRange[priceRangeValue].max < price) {
     return false
@@ -101,7 +108,7 @@ const filterHostel = (hostel) => {
 }
 
 const filtredMarkers = (data) => {
-  return data.filter(filterHostel).slice(0,10);
+  return data.filter(filterHostel).slice(0, MAX_MARKERS);
 }
 
 
