@@ -10,7 +10,7 @@ const hostelFeatures = filterForm.querySelector('#housing-features');
 
 const MAX_PRICE = 1000000000
 const MAX_MARKERS = 10;
-const priсeRange = {
+const priceRange = {
   low: {
     min: 0,
     max: 10000,
@@ -29,29 +29,16 @@ const priсeRange = {
   },
 }
 
-const getCheckedCheckBoxesValue = () => {
-  const checkedValue = [];
-  const checkBoxes = hostelFeatures.querySelectorAll('.map__checkbox:checked');
-  for(const checkBox of checkBoxes) {
-    checkedValue.push(checkBox.value);
-  }
-
-  return checkedValue;
-}
-
-const compareFeatures = (filter, data) => {
-  if (filter.length === 0) {
-
+const compareFeatures = (checkboxes, features) => {
+  if (checkboxes.length === 0) {
     return true;
   }
-  if (filter.length > data.length) {
-
+  if (checkboxes.length > features.length) {
     return false;
   }
 
-  for(const elem of filter) {
-    if(!data.includes(elem)) {
-
+  for(const checkbox of checkboxes) {
+    if(!features.includes(checkbox.value)) {
       return false
     }
   }
@@ -69,7 +56,7 @@ const filterHostel = (hostel) => {
     features,
   } = offer;
 
-  const activeFeatures = getCheckedCheckBoxesValue()
+  const activeFeatures = hostelFeatures.querySelectorAll('.map__checkbox:checked');
 
   let isFiltered = true;
 
@@ -78,11 +65,11 @@ const filterHostel = (hostel) => {
       hostelRooms.value === 'any' &&
       hostelGuests.value === 'any' &&
       activeFeatures.length === 0) {
-    return true
+    return true;
   }
 
   if (hostelType.value !== 'any' && hostelType.value !== type) {
-    return false
+    return false;
   }
 
   if (hostelRooms.value !== 'any' && +hostelRooms.value !== rooms) {
@@ -94,8 +81,8 @@ const filterHostel = (hostel) => {
   }
 
   const priceRangeValue =  hostelPrice.value;
-  if(priсeRange[priceRangeValue].min >= price || priсeRange[priceRangeValue].max < price) {
-    return false
+  if (priceRange[priceRangeValue].min >= price || priceRange[priceRangeValue].max < price) {
+    return false;
   }
 
   isFiltered = compareFeatures(activeFeatures, features);
@@ -103,12 +90,24 @@ const filterHostel = (hostel) => {
 }
 
 const filterMarkers = (data) => {
-  return data.filter(filterHostel).slice(0, MAX_MARKERS);
+  const filtredArray = [];
+  let counterOfFiltredElement = 0 ;
+  for (let i = 0; i < data.length; i++) {
+    let hostel = data[i];
+    if (filterHostel(hostel)) {
+      filtredArray.push(hostel);
+      counterOfFiltredElement++
+    }
+    if (counterOfFiltredElement > MAX_MARKERS) {
+      break
+    }
+  }
+  return filtredArray
 }
 
 
 export const setFilterListener = (cb) => {
-  filterForm.addEventListener('change', () =>{
+  filterForm.addEventListener('change', () => {
     clearMarkers();
     cb();
   })
