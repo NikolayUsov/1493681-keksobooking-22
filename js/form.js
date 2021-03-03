@@ -1,4 +1,5 @@
-import {createSearchMarker, returnMap, DefaultLocation} from './map.js';
+// eslint-disable-next-line no-unused-vars
+import {createSearchMarker, resetMap, DefaultLocation} from './map.js';
 import {sendData} from './api.js'
 import {showSuccessMessage,showErrorMessage} from './messages.js'
 
@@ -17,8 +18,9 @@ const TitleLength = {
   MIN: 30,
   MAX: 100,
 };
-const addressMarker = createSearchMarker();
+//export const addressMarker = createSearchMarker();
 const form = document.querySelector('.ad-form')
+const addressMarker = createSearchMarker();
 const selectType = form.querySelector('#type');
 const inputPrice = form.querySelector('#price')
 const selectCheckIn = form.querySelector('#timein');
@@ -110,7 +112,7 @@ const onFormSubmit = (evt) => {
 const onFormReset = (evt) => {
   evt.preventDefault();
   form.reset();
-  returnMap();
+  resetMap()
   resetMarker();
 }
 

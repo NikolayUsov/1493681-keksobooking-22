@@ -23,7 +23,6 @@ const showSuccessMessage = () => {
   })
 
   document.addEventListener('keydown', onEscCloseMessage)
-
 }
 
 const showErrorMessage = (errorText) => {
@@ -42,8 +41,6 @@ const showErrorMessage = (errorText) => {
     messageError.remove();
     document.removeEventListener('keydown', onEscCloseMessage);
   })
-
-  messageError.removeEventListener('click', () => messageError.remove());
 
   document.addEventListener('keydown',onEscCloseMessage);
 
