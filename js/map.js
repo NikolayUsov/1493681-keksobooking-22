@@ -1,13 +1,14 @@
 /* global L:readonly */
 import {togglePageStatus} from './status-page.js';
 import {createHostelCardElement} from './hostel-card.js';
-import {filtredMarkers} from './filter.js';
+import {filterMarkers} from './filter.js';
 export const DefaultLocation = {
   X: 35.68240,
   Y: 139.75176,
 };
 // eslint-disable-next-line no-unused-vars
 const MAX_HOSTEL_MARKERS = 10;
+// eslint-disable-next-line no-unused-vars
 const hostelsMarkers = []
 
 const LeafletProperties = {
@@ -39,6 +40,10 @@ L.tileLayer(
   },
 ).addTo(map);
 
+//Добавил потом удалю
+/* const markersGroup = new L.layerGroup()
+markersGroup.addTo(map);
+ */
 export const resetMap = () => {
   map
     .setView({
@@ -93,21 +98,20 @@ export const createMarker = (hostel) => {
   );
   hostelsMarkers.push(marker);
   marker.addTo(map);
+  // markersGroup.addLayer(marker);
   map.addLayer(marker);
   marker.bindPopup(createHostelCardElement(hostel));
 }
 
 
 export const clearMarkers = () => {
+  //map.removeLayer(markersGroup);
   hostelsMarkers.forEach((elem) => map.removeLayer(elem));
   hostelsMarkers.splice(0, hostelsMarkers.length)
   map.closePopup();
 }
 
 export const renderMarkers = (data) => {
-  let markers = filtredMarkers(data);
-  markers.
-    forEach((elem) => {
-      createMarker(elem);
-    })
+  const markers = filterMarkers(data);
+  markers.forEach((elem) => {createMarker(elem);})
 }
