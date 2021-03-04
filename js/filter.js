@@ -92,16 +92,20 @@ const filterHostel = (hostel) => {
 const filterMarkers = (data) => {
   const filtredArray = [];
   let counterOfFiltredElement = 0 ;
+
   for (let i = 0; i < data.length; i++) {
     let hostel = data[i];
+
     if (filterHostel(hostel)) {
       filtredArray.push(hostel);
       counterOfFiltredElement++
     }
+
     if (counterOfFiltredElement > MAX_MARKERS) {
       break
     }
   }
+
   return filtredArray
 }
 

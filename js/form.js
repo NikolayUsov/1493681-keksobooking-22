@@ -1,12 +1,14 @@
+/* eslint-disable no-undef */
 // eslint-disable-next-line no-unused-vars
 import {createSearchMarker, resetMap, DefaultLocation} from './map.js';
 import {sendData} from './api.js'
 import {showSuccessMessage,showErrorMessage} from './messages.js'
+import { debounce } from './util.js';
+
 
 const MAX_GUESTS_VALUE = 100;
 const MAX_ROOMS_VALUE = 0;
 const SEND_FORM_ERROR_TEXT = 'Ошибка размещения объявления';
-
 const minPriceOfType = {
   palace: '10000',
   flat: '1000',
@@ -116,7 +118,9 @@ const onFormReset = (evt) => {
   resetMarker();
 }
 
-inputTitle.addEventListener('change', onInputTitleChange);
+
+
+inputTitle.addEventListener('input', debounce(onInputTitleChange,500));
 inputPrice.addEventListener('input', onPriceInput);
 selectCheckIn.addEventListener('change', onSelectChange);
 selectCheckOut.addEventListener('change', onSelectChange);
