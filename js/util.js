@@ -47,3 +47,13 @@ export const declination = (number, txt, cases = [2, 0, 1, 1, 1, 2]) => {
 export const isEscEvent = (evt) => {
   return evt.key === 'Escape' || evt.key === 'Esc';
 };
+
+export const debounce = (fn, delay) => {
+  let time;
+  return function () {
+    const debounced  = () => { fn.apply(this, arguments) }
+    clearTimeout(time);
+    time = setTimeout(debounced, delay)
+  }
+};
+

@@ -1,4 +1,7 @@
+/* eslint-disable no-undef */
+// eslint-disable-next-line no-unused-vars
 import {clearMarkers} from './map.js';
+//import { debounce } from './util.js';
 
 /* eslint-disable no-unused-vars */
 const filterForm = document.querySelector('.map__filters');
@@ -90,19 +93,23 @@ const filterHostel = (hostel) => {
 }
 
 const filterMarkers = (data) => {
-  const filtredArray = [];
+  const filteredArray = [];
   let counterOfFiltredElement = 0 ;
+
   for (let i = 0; i < data.length; i++) {
     let hostel = data[i];
+
     if (filterHostel(hostel)) {
-      filtredArray.push(hostel);
+      filteredArray.push(hostel);
       counterOfFiltredElement++
     }
+
     if (counterOfFiltredElement > MAX_MARKERS) {
-      break
+      return filteredArray
     }
   }
-  return filtredArray
+
+  return filteredArray
 }
 
 

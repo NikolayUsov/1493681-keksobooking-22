@@ -7,6 +7,7 @@ import {renderMarkers} from './map.js'
 import {showErrorMessage} from './messages.js'
 import './form-photo.js';
 
+
 const successHandler = (data) =>  {
   renderMarkers(data);
   setFilterListener(_.debounce(() => renderMarkers(data)),500)
