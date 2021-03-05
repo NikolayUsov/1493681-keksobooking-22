@@ -57,3 +57,12 @@ export const debounce = (fn, delay) => {
   }
 };
 
+export const  createImgElement = (alt ='', width = '50', height = '50') => {
+  const img = document.createElement('img');
+  img.src = '';
+  img.alt = alt;
+  img.width = width;
+  img.height = height;
+
+  return img
+}

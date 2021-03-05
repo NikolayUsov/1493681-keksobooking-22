@@ -1,9 +1,6 @@
-/* eslint-disable no-undef */
-// eslint-disable-next-line no-unused-vars
-import {clearMarkers} from './map.js';
-//import { debounce } from './util.js';
 
-/* eslint-disable no-unused-vars */
+import {clearMarkers} from './map.js';
+
 const filterForm = document.querySelector('.map__filters');
 const hostelType = filterForm.querySelector('#housing-type');
 const hostelPrice = filterForm.querySelector('#housing-price');
@@ -31,6 +28,7 @@ const priceRange = {
     max: MAX_PRICE,
   },
 }
+const ALL = 'any';
 
 const compareFeatures = (checkboxes, features) => {
   if (checkboxes.length === 0) {
@@ -63,23 +61,23 @@ const filterHostel = (hostel) => {
 
   let isFiltered = true;
 
-  if (hostelType.value === 'any' &&
-      hostelPrice.value === 'any' &&
-      hostelRooms.value === 'any' &&
-      hostelGuests.value === 'any' &&
+  if (hostelType.value === ALL &&
+      hostelPrice.value === ALL &&
+      hostelRooms.value === ALL &&
+      hostelGuests.value === ALL &&
       activeFeatures.length === 0) {
     return true;
   }
 
-  if (hostelType.value !== 'any' && hostelType.value !== type) {
+  if (hostelType.value !== ALL && hostelType.value !== type) {
     return false;
   }
 
-  if (hostelRooms.value !== 'any' && +hostelRooms.value !== rooms) {
+  if (hostelRooms.value !== ALL && +hostelRooms.value !== rooms) {
     return false;
   }
 
-  if (hostelGuests.value !== 'any' && guests !== +hostelGuests.value) {
+  if (hostelGuests.value !== ALL && guests !== +hostelGuests.value) {
     return false;
   }
 
@@ -89,22 +87,23 @@ const filterHostel = (hostel) => {
   }
 
   isFiltered = compareFeatures(activeFeatures, features);
+
   return isFiltered
 }
 
 const filterMarkers = (data) => {
   const filteredArray = [];
-  let counterOfFiltredElement = 0 ;
+  let counterOfFilteredElement = 0 ;
 
   for (let i = 0; i < data.length; i++) {
     let hostel = data[i];
 
     if (filterHostel(hostel)) {
       filteredArray.push(hostel);
-      counterOfFiltredElement++
+      counterOfFilteredElement++
     }
 
-    if (counterOfFiltredElement > MAX_MARKERS) {
+    if (counterOfFilteredElement > MAX_MARKERS) {
       return filteredArray
     }
   }

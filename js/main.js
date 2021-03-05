@@ -7,10 +7,10 @@ import {renderMarkers} from './map.js'
 import {showErrorMessage} from './messages.js'
 import './form-photo.js';
 
-
+//не понимаю почему дебоунс так работает
 const successHandler = (data) =>  {
   renderMarkers(data);
-  setFilterListener(_.debounce(() => renderMarkers(data)),500)
+  setFilterListener(_.debounce(() => renderMarkers(data),500))
 }
 const errorHandler = (message) => showErrorMessage(message)
 
