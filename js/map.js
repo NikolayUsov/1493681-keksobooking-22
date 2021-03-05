@@ -73,11 +73,10 @@ export const createSearchMarker = () => {
   return marker;
 }
 
-//let markersLayer ;
+let markerGroup;
 
-export const createMarker = (hostel) => {
-/*   markersLayer = L.layerGroup();
-  map.addLayer(markersLayer); */
+export const createMarker = (hostel, group) => {
+
   const mainIcon = L.icon(
     {
       iconUrl: LeafletProperties.PATH_TO_MARKER,
@@ -96,22 +95,18 @@ export const createMarker = (hostel) => {
     },
   );
 
-  hostelsMarkers.push(marker);
-  marker.addTo(map);
-  // markersGroup.addLayer(marker);
-  marker.addTo(map);
+  marker.addTo(group);
   marker.bindPopup(createHostelCardElement(hostel));
 }
 
 export const clearMarkers = () => {
-  //map.removeLayer(markersLayer);
-  // map.removeLayer(markersGroup);
-  hostelsMarkers.forEach((elem) => map.removeLayer(elem));
-  hostelsMarkers = [];
+  map.removeLayer(markerGroup);
   map.closePopup();
 }
 
 export const renderMarkers = (data) => {
   const markers = filterMarkers(data);
-  markers.forEach((elem) => {createMarker(elem)})
+  markerGroup = L.layerGroup();
+  markers.forEach((elem) => {createMarker(elem, markerGroup)})
+  markerGroup.addTo(map);
 }
