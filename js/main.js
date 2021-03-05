@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 
 import {setFilterListener} from './filter.js';
 import './form.js';
@@ -8,7 +9,7 @@ import './form-photo.js';
 
 const successHandler = (data) =>  {
   renderMarkers(data);
-  setFilterListener(() => renderMarkers(data))
+  setFilterListener(_.debounce(() => renderMarkers(data)),500)
 }
 const errorHandler = (message) => showErrorMessage(message)
 
