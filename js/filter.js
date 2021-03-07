@@ -1,5 +1,6 @@
 
-import {clearMarkers} from './map.js';
+import {reRenderMarkers} from './map.js';
+import { debounce } from './util.js';
 
 const filterForm = document.querySelector('.map__filters');
 const hostelType = filterForm.querySelector('#housing-type');
@@ -8,6 +9,7 @@ const hostelRooms = filterForm.querySelector('#housing-rooms');
 const hostelGuests = filterForm.querySelector('#housing-guests');
 const hostelFeatures = filterForm.querySelector('#housing-features');
 
+const RENDER_DELAY = 500;
 const MAX_PRICE = 1000000000
 const MAX_MARKERS = 10;
 const priceRange = {
@@ -112,11 +114,9 @@ const filterMarkers = (data) => {
 }
 
 
-export const setFilterListener = (cb) => {
-  filterForm.addEventListener('change', () => {
-    clearMarkers();
-    cb();
-  })
+export const setFilterListener = (data) => {
+  // eslint-disable-next-line no-undef
+  filterForm.addEventListener('change',debounce(() => {reRenderMarkers(data)}, RENDER_DELAY));
 }
 
 export {filterHostel,filterMarkers};

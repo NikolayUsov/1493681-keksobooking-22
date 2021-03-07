@@ -110,3 +110,8 @@ export const renderMarkers = (data) => {
   markers.forEach((elem) => {createMarker(elem, markerGroup)})
   markerGroup.addTo(map);
 }
+
+export const reRenderMarkers = (data) => {
+  clearMarkers();
+  renderMarkers(data)
+}

@@ -4,7 +4,7 @@ const avatarPreviewPicture = document.querySelector('.ad-form-header__preview');
 const avatarPreviewUpLoader = document.querySelector('.ad-form-header__input');
 const hostelPreviewPicture = document.querySelector('.ad-form__photo');
 const hostelPreviewUploader = document.querySelector('.ad-form__input');
-const IMG_FORMAT = ['image/jpg', 'image/png', 'image/svg', 'image/jepg', 'image/svg+xml'];
+const IMG_FORMAT = ['image/jpg', 'image/png', 'image/svg', 'image/jpeg', 'image/svg+xml'];
 const HOSTEL_PHOTO_ALT = 'Фотография вашего объекта';
 
 const onUploadeChange = (upload, preview) => {
@@ -17,7 +17,7 @@ const onUploadeChange = (upload, preview) => {
   }
 
   if (matches) {
-    const reader = new FileReader
+    const reader = new FileReader();
     reader.addEventListener('load', () => {
       // до этого тут было написано  preview.firstChild.src не понял почему с первой картинкой не работало
       preview.children[0].src = reader.result;
