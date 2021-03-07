@@ -12,8 +12,8 @@ const successHandler = (data) =>  {
   renderMarkers(data);
   setFilterListener(data)
 }
-const errorHandler = (message) => showErrorMessage(message)
 
+const errorHandler = (message) => showErrorMessage(message)
 getData(successHandler,errorHandler)
 
 

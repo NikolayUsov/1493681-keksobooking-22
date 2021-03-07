@@ -22,7 +22,7 @@
   "dependencies": {},
   "scripts": {
     "build": "webpack --mode production",
-    "start": "browser-sync start --server \"build/\" --no-ui --files \"source/**/*.js\"",
+    "start": "webpack-dev-server",
     "test": "eslint source/js/",
     "lintFix": "eslint --fix js/"
   },

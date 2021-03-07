@@ -113,5 +113,5 @@ export const renderMarkers = (data) => {
 
 export const reRenderMarkers = (data) => {
   clearMarkers();
-  renderMarkers(data)
+  renderMarkers(data);
 }
