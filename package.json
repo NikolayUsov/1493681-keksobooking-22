@@ -25,7 +25,7 @@
     "build": "webpack --mode production",
     "dev": "webpack serve --open --mode development",
     "start": "browser-sync start --server \"build/\" --no-ui --files \"source/**/*.js\"",
-    "test": "eslint source/js/",
+    "test": "eslint source/",
     "lintFix": "eslint --fix js/"
   },
   "engines": {
