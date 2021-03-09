@@ -9,7 +9,7 @@ export const DefaultLocation = {
 // eslint-disable-next-line no-unused-vars
 const MAX_HOSTEL_MARKERS = 10;
 // eslint-disable-next-line no-unused-vars
-const hostelsMarkers = []
+let hostelsMarkers = []
 
 const LeafletProperties = {
   PATH_TO_MAIN_PIN: '../img/main-pin.svg',
@@ -40,10 +40,6 @@ L.tileLayer(
   },
 ).addTo(map);
 
-//Добавил потом удалю
-/* const markersGroup = new L.layerGroup()
-markersGroup.addTo(map);
- */
 export const resetMap = () => {
   map
     .setView({
@@ -77,7 +73,9 @@ export const createSearchMarker = () => {
   return marker;
 }
 
-export const createMarker = (hostel) => {
+let markerGroup;
+
+export const createMarker = (hostel, group) => {
 
   const mainIcon = L.icon(
     {
@@ -96,22 +94,24 @@ export const createMarker = (hostel) => {
       icon: mainIcon,
     },
   );
-  hostelsMarkers.push(marker);
-  marker.addTo(map);
-  // markersGroup.addLayer(marker);
-  map.addLayer(marker);
+
+  marker.addTo(group);
   marker.bindPopup(createHostelCardElement(hostel));
 }
 
-
 export const clearMarkers = () => {
-  //map.removeLayer(markersGroup);
-  hostelsMarkers.forEach((elem) => map.removeLayer(elem));
-  hostelsMarkers.splice(0, hostelsMarkers.length)
+  map.removeLayer(markerGroup);
   map.closePopup();
 }
 
 export const renderMarkers = (data) => {
   const markers = filterMarkers(data);
-  markers.forEach((elem) => {createMarker(elem);})
+  markerGroup = L.layerGroup();
+  markers.forEach((elem) => {createMarker(elem, markerGroup)})
+  markerGroup.addTo(map);
+}
+
+export const reRenderMarkers = (data) => {
+  clearMarkers();
+  renderMarkers(data);
 }
