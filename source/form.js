@@ -4,7 +4,7 @@ import {createSearchMarker, resetMap, DefaultLocation} from './map.js';
 import {sendData} from './api.js'
 import {showSuccessMessage,showErrorMessage} from './messages.js'
 import { debounce } from './util.js';
-
+import {clearPhotoPreview} from './form-photo.js'
 
 const MAX_GUESTS_VALUE = 100;
 const MAX_ROOMS_VALUE = 0;
@@ -108,6 +108,7 @@ const sendFormError = () => showErrorMessage(SEND_FORM_ERROR_TEXT)
 
 const onFormSubmit = (evt) => {
   evt.preventDefault();
+  clearPhotoPreview();
   sendData(sendFormSuccess,sendFormError,new FormData (evt.target))
 };
 
@@ -116,6 +117,7 @@ const onFormReset = (evt) => {
   form.reset();
   resetMap()
   resetMarker();
+  clearPhotoPreview();
 }
 
 

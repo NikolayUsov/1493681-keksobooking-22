@@ -6,7 +6,7 @@ const hostelPreviewPicture = document.querySelector('.ad-form__photo');
 const hostelPreviewUploader = document.querySelector('.ad-form__input');
 const IMG_FORMAT = ['image/jpg', 'image/png', 'image/svg', 'image/jpeg', 'image/svg+xml'];
 const HOSTEL_PHOTO_ALT = 'Фотография вашего объекта';
-
+const DEFAULT_SRC = 'img/muffin-grey.svg'
 const onUploadeChange = (upload, preview) => {
   const file = upload.files[0];
   const fileType = file.type;
@@ -27,5 +27,13 @@ const onUploadeChange = (upload, preview) => {
   }
 }
 
+const clearPhotoPreview = () => {
+  const avatarImg = avatarPreviewPicture.querySelector('img');
+  avatarImg.src = DEFAULT_SRC;
+  hostelPreviewPicture.innerHTML = '';
+}
+
 hostelPreviewUploader.addEventListener('change', () => onUploadeChange(hostelPreviewUploader, hostelPreviewPicture))
 avatarPreviewUpLoader.addEventListener('change', () => onUploadeChange(avatarPreviewUpLoader, avatarPreviewPicture))
+
+export {clearPhotoPreview}

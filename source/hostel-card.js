@@ -37,6 +37,18 @@ const addSrcFromArr = (arr, img) => {
   return imgFragment;
 }
 
+const clearEmptyElement = (parentNodes) => {
+  const child = parentNodes.children;
+
+  for(let elem of child) {
+    if (!elem.hasChildNodes() && elem.tagName !== 'IMG') {
+      elem.remove()
+    }
+  }
+
+  return parentNodes
+}
+
 export const createHostelCardElement = (hostel) => {
   const {offer, author} = hostel;
   const {
@@ -77,5 +89,5 @@ export const createHostelCardElement = (hostel) => {
   hostelPhotoContainer.innerHTML = ''
   hostelPhotoContainer.appendChild(addSrcFromArr(photos, photoOfHostel));
 
-  return hostelCard
+  return clearEmptyElement(hostelCard)
 }
