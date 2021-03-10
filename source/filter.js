@@ -106,11 +106,11 @@ const filterMarkers = (data) => {
     }
 
     if (counterOfFilteredElement > MAX_MARKERS) {
-      return filteredArray
+      return filteredArray;
     }
   }
 
-  return filteredArray
+  return filteredArray;
 }
 
 export const setFilterListener = (data) => {

@@ -21,7 +21,7 @@ const showSuccessMessage = () => {
     document.removeEventListener('keydown', onEscCloseMessage);
   })
 
-  document.addEventListener('keydown', onEscCloseMessage)
+  document.addEventListener('keydown', onEscCloseMessage);
 }
 
 const showErrorMessage = (errorText) => {

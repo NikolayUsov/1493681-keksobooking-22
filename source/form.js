@@ -1,8 +1,8 @@
 import { createSearchMarker, resetMap, DefaultLocation } from './map.js';
-import { sendData } from './api.js'
-import { showSuccessMessage, showErrorMessage } from './messages.js'
+import { sendData } from './api.js';
+import { showSuccessMessage, showErrorMessage } from './messages.js';
 import { debounce } from './util.js';
-import { clearPhotoPreview } from './form-photo.js'
+import { clearPhotoPreview } from './form-photo.js';
 
 const MAX_GUESTS_VALUE = 100;
 const MAX_ROOMS_VALUE = 0;
@@ -25,8 +25,8 @@ const selectType = form.querySelector('#type');
 const inputPrice = form.querySelector('#price')
 const selectCheckIn = form.querySelector('#timein');
 const selectCheckOut = form.querySelector('#timeout');
-const inputAddress = form.querySelector('#address')
-const inputTitle = form.querySelector('#title')
+const inputAddress = form.querySelector('#address');
+const inputTitle = form.querySelector('#title');
 const selectRoomNumber = form.querySelector('#room_number');
 const selectGuests = form.querySelector('#capacity');
 const resetButton = form.querySelector('.ad-form__reset');
@@ -43,23 +43,23 @@ const onInputTitleChange = (evt) => {
   const title = evt.target.value;
 
   if (title.length < TitleLength.MIN) {
-    evt.target.setCustomValidity(`Введите еще  ${TitleLength.MIN - title.length} сим.`)
+    evt.target.setCustomValidity(`Введите еще  ${TitleLength.MIN - title.length} сим.`);
 
   } else if (title.length > TitleLength.MAX) {
     evt.target.setCustomValidity(`Слишком длинное название удалите:  ${title.length - TitleLength.MAX} сим.`);
   } else {
-    evt.target.setCustomValidity('')
+    evt.target.setCustomValidity('');
   }
   evt.target.reportValidity();
 }
 
 const onPriceInput = (evt) => {
   if (evt.target.validity.rangeOverflow) {
-    evt.target.setCustomValidity(`Стоимость не должна быть больше ${evt.target.max}`)
+    evt.target.setCustomValidity(`Стоимость не должна быть больше ${evt.target.max}`);
   } else if (evt.target.validity.rangeUnderflow) {
-    evt.target.setCustomValidity(`Стоимость не должна быть меньше ${evt.target.min}`)
+    evt.target.setCustomValidity(`Стоимость не должна быть меньше ${evt.target.min}`);
   } else {
-    evt.target.setCustomValidity('')
+    evt.target.setCustomValidity('');
   }
   evt.target.reportValidity();
 }
@@ -125,7 +125,7 @@ selectCheckOut.addEventListener('change', onSelectChange);
 selectType.addEventListener('change', onTypeInputChange);
 selectRoomNumber.addEventListener('change', onSelectRoomsChange);
 form.addEventListener('submit', onFormSubmit);
-resetButton.addEventListener('click', onFormReset)
+resetButton.addEventListener('click', onFormReset);
 
 addressMarker.on('move', onMarkerMove);
 inputAddress.readOnly = true;

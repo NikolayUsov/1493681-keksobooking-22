@@ -12,7 +12,7 @@ export const debounce = (fn, delay) => {
   return function () {
     const debounced  = () => { fn.apply(this, arguments) }
     clearTimeout(time);
-    time = setTimeout(debounced, delay)
+    time = setTimeout(debounced, delay);
   }
 };
 

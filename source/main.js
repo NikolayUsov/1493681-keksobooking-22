@@ -7,10 +7,10 @@ import './form-photo.js';
 
 const successHandler = (data) => {
   renderMarkers(data);
-  setFilterListener(data)
+  setFilterListener(data);
 }
 
-const errorHandler = (message) => showErrorMessage(message)
-getData(successHandler, errorHandler)
+const errorHandler = (message) => showErrorMessage(message);
+getData(successHandler, errorHandler);
 
 

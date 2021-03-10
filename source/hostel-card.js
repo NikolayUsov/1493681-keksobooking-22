@@ -42,7 +42,7 @@ const clearEmptyElement = (parentNode) => {
 
   for (let elem of child) {
     if (!elem.hasChildNodes() && elem.tagName !== 'IMG') {
-      elem.remove()
+      elem.remove();
     }
   }
 
