@@ -7,10 +7,4 @@ module.exports = {
     filename: 'main.bundle.js',
     path: path.resolve(__dirname, 'build/js'),
   },
-  devServer: {
-    contentBase: path.join(__dirname, "build"),
-    port: 8000,
-    historyApiFallback: true,
-    hot: true,
-  },
 }

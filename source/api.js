@@ -22,11 +22,12 @@ const sendData = (onSuccess, onError, data) => {
     .then((response) => {
       if (response.ok) {
         onSuccess()
-      } else {throw new Error()}
+      } else { throw new Error() }
     })
     .catch(() => {
-      onError()})
+      onError()
+    })
 
 }
 
-export {getData, sendData}
+export { getData, sendData };

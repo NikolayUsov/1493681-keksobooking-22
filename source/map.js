@@ -6,10 +6,6 @@ export const DefaultLocation = {
   X: 35.68240,
   Y: 139.75176,
 };
-// eslint-disable-next-line no-unused-vars
-const MAX_HOSTEL_MARKERS = 10;
-// eslint-disable-next-line no-unused-vars
-let hostelsMarkers = []
 
 const LeafletProperties = {
   PATH_TO_MAIN_PIN: '../img/main-pin.svg',

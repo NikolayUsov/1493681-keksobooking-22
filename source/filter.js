@@ -1,5 +1,5 @@
 
-import {reRenderMarkers} from './map.js';
+import { reRenderMarkers } from './map.js';
 import { debounce } from './util.js';
 
 const filterForm = document.querySelector('.map__filters');
@@ -40,17 +40,17 @@ const compareFeatures = (checkboxes, features) => {
     return false;
   }
 
-  for(const checkbox of checkboxes) {
-    if(!features.includes(checkbox.value)) {
+  for (const checkbox of checkboxes) {
+    if (!features.includes(checkbox.value)) {
       return false
     }
   }
 
-  return true
+  return true;
 }
 
 const filterHostel = (hostel) => {
-  const {offer} = hostel;
+  const { offer } = hostel;
   const {
     price,
     type,
@@ -64,10 +64,10 @@ const filterHostel = (hostel) => {
   let isFiltered = true;
 
   if (hostelType.value === ALL &&
-      hostelPrice.value === ALL &&
-      hostelRooms.value === ALL &&
-      hostelGuests.value === ALL &&
-      activeFeatures.length === 0) {
+    hostelPrice.value === ALL &&
+    hostelRooms.value === ALL &&
+    hostelGuests.value === ALL &&
+    activeFeatures.length === 0) {
     return true;
   }
 
@@ -83,7 +83,7 @@ const filterHostel = (hostel) => {
     return false;
   }
 
-  const priceRangeValue =  hostelPrice.value;
+  const priceRangeValue = hostelPrice.value;
   if (priceRange[priceRangeValue].min >= price || priceRange[priceRangeValue].max < price) {
     return false;
   }
@@ -95,7 +95,7 @@ const filterHostel = (hostel) => {
 
 const filterMarkers = (data) => {
   const filteredArray = [];
-  let counterOfFilteredElement = 0 ;
+  let counterOfFilteredElement = 0;
 
   for (let i = 0; i < data.length; i++) {
     let hostel = data[i];
@@ -113,10 +113,8 @@ const filterMarkers = (data) => {
   return filteredArray
 }
 
-
 export const setFilterListener = (data) => {
-  // eslint-disable-next-line no-undef
-  filterForm.addEventListener('change',debounce(() => {reRenderMarkers(data)}, RENDER_DELAY));
+  filterForm.addEventListener('change', debounce(() => { reRenderMarkers(data) }, RENDER_DELAY));
 }
 
-export {filterHostel,filterMarkers};
+export { filterHostel, filterMarkers };

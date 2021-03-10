@@ -1,19 +1,16 @@
-/* eslint-disable no-undef */
-
-import {setFilterListener} from './filter.js';
+import { setFilterListener } from './filter.js';
 import './form.js';
-import {getData} from './api.js'
-import {renderMarkers} from './map.js'
-import {showErrorMessage} from './messages.js'
+import { getData } from './api.js'
+import { renderMarkers } from './map.js'
+import { showErrorMessage } from './messages.js'
 import './form-photo.js';
 
-//не понимаю почему дебоунс так работает
-const successHandler = (data) =>  {
+const successHandler = (data) => {
   renderMarkers(data);
   setFilterListener(data)
 }
 
 const errorHandler = (message) => showErrorMessage(message)
-getData(successHandler,errorHandler)
+getData(successHandler, errorHandler)
 
 

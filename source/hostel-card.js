@@ -1,11 +1,11 @@
-import {declination} from './util.js';
+import { declination } from './util.js';
 
 const WORD_DECLINATION = {
-  room : ['комната', 'комнаты', 'комнат'],
+  room: ['комната', 'комнаты', 'комнат'],
   guest: ['гостя', 'гостей', 'гостей'],
 };
 
-const typeTranslate =  {
+const typeTranslate = {
   palace: 'Дворец',
   flat: 'Квартира',
   house: 'Дом',
@@ -37,20 +37,20 @@ const addSrcFromArr = (arr, img) => {
   return imgFragment;
 }
 
-const clearEmptyElement = (parentNodes) => {
-  const child = parentNodes.children;
+const clearEmptyElement = (parentNode) => {
+  const child = parentNode.children;
 
-  for(let elem of child) {
+  for (let elem of child) {
     if (!elem.hasChildNodes() && elem.tagName !== 'IMG') {
       elem.remove()
     }
   }
 
-  return parentNodes
+  return parentNode;
 }
 
 export const createHostelCardElement = (hostel) => {
-  const {offer, author} = hostel;
+  const { offer, author } = hostel;
   const {
     title,
     address,
@@ -65,13 +65,13 @@ export const createHostelCardElement = (hostel) => {
     photos,
   } = offer;
 
-  const {avatar} = author;
+  const { avatar } = author;
 
   const hostelCardTemplate = document.querySelector('#card').content.querySelector('.popup');
   const hostelCard = hostelCardTemplate.cloneNode(true);
 
   hostelCard.querySelector('.popup__avatar').src = avatar;
-  hostelCard.querySelector('.popup__title').textContent =title;
+  hostelCard.querySelector('.popup__title').textContent = title;
   hostelCard.querySelector('.popup__text--address').textContent = address;
   hostelCard.querySelector('.popup__text--price').innerHTML = `${price} <span>₽/ночь</span`;
   hostelCard.querySelector('.popup__type').textContent = typeTranslate[type];
@@ -89,5 +89,5 @@ export const createHostelCardElement = (hostel) => {
   hostelPhotoContainer.innerHTML = ''
   hostelPhotoContainer.appendChild(addSrcFromArr(photos, photoOfHostel));
 
-  return clearEmptyElement(hostelCard)
+  return clearEmptyElement(hostelCard);
 }

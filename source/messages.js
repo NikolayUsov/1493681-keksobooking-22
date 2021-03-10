@@ -4,7 +4,6 @@ const messageTemplate = document.querySelector('#success').content.querySelector
 const errorTemplate = document.querySelector('#error').content.querySelector('.error');
 const main = document.querySelector('main');
 
-
 const showSuccessMessage = () => {
   const messageSuccess = messageTemplate.cloneNode(true);
   messageSuccess.style.zIndex = '1000';

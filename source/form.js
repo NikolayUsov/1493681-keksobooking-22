@@ -1,10 +1,8 @@
-/* eslint-disable no-undef */
-// eslint-disable-next-line no-unused-vars
-import {createSearchMarker, resetMap, DefaultLocation} from './map.js';
-import {sendData} from './api.js'
-import {showSuccessMessage,showErrorMessage} from './messages.js'
+import { createSearchMarker, resetMap, DefaultLocation } from './map.js';
+import { sendData } from './api.js'
+import { showSuccessMessage, showErrorMessage } from './messages.js'
 import { debounce } from './util.js';
-import {clearPhotoPreview} from './form-photo.js'
+import { clearPhotoPreview } from './form-photo.js'
 
 const MAX_GUESTS_VALUE = 100;
 const MAX_ROOMS_VALUE = 0;
@@ -20,7 +18,7 @@ const TitleLength = {
   MIN: 30,
   MAX: 100,
 };
-//export const addressMarker = createSearchMarker();
+
 const form = document.querySelector('.ad-form')
 const addressMarker = createSearchMarker();
 const selectType = form.querySelector('#type');
@@ -31,7 +29,7 @@ const inputAddress = form.querySelector('#address')
 const inputTitle = form.querySelector('#title')
 const selectRoomNumber = form.querySelector('#room_number');
 const selectGuests = form.querySelector('#capacity');
-const resetButton =form.querySelector('.ad-form__reset');
+const resetButton = form.querySelector('.ad-form__reset');
 
 const onMarkerMove = () => {
   const address = addressMarker.getLatLng();
@@ -39,7 +37,7 @@ const onMarkerMove = () => {
 };
 
 const resetMarker = () => {
-  addressMarker.setLatLng([DefaultLocation.X,DefaultLocation.Y])
+  addressMarker.setLatLng([DefaultLocation.X, DefaultLocation.Y])
 }
 const onInputTitleChange = (evt) => {
   const title = evt.target.value;
@@ -57,9 +55,9 @@ const onInputTitleChange = (evt) => {
 
 const onPriceInput = (evt) => {
   if (evt.target.validity.rangeOverflow) {
-    evt.target.setCustomValidity (`Стоимость не должна быть больше ${evt.target.max}`)
+    evt.target.setCustomValidity(`Стоимость не должна быть больше ${evt.target.max}`)
   } else if (evt.target.validity.rangeUnderflow) {
-    evt.target.setCustomValidity (`Стоимость не должна быть меньше ${evt.target.min}`)
+    evt.target.setCustomValidity(`Стоимость не должна быть меньше ${evt.target.min}`)
   } else {
     evt.target.setCustomValidity('')
   }
@@ -81,7 +79,7 @@ const onSelectRoomsChange = () => {
   const guestElements = selectGuests.children;
   const guestsArray = Array.from(guestElements);
 
-  +selectRoomNumber.value === MAX_ROOMS_VALUE ? selectGuests.value = MAX_GUESTS_VALUE  : selectGuests.value = selectRoomNumber.value;
+  +selectRoomNumber.value === MAX_ROOMS_VALUE ? selectGuests.value = MAX_GUESTS_VALUE : selectGuests.value = selectRoomNumber.value;
 
   for (const guest of guestOptions) {
     guest.style.display = 'block';
@@ -109,7 +107,7 @@ const sendFormError = () => showErrorMessage(SEND_FORM_ERROR_TEXT)
 const onFormSubmit = (evt) => {
   evt.preventDefault();
   clearPhotoPreview();
-  sendData(sendFormSuccess,sendFormError,new FormData (evt.target))
+  sendData(sendFormSuccess, sendFormError, new FormData(evt.target))
 };
 
 const onFormReset = (evt) => {
@@ -120,17 +118,14 @@ const onFormReset = (evt) => {
   clearPhotoPreview();
 }
 
-
-
-inputTitle.addEventListener('input', debounce(onInputTitleChange,500));
+inputTitle.addEventListener('input', debounce(onInputTitleChange, 500));
 inputPrice.addEventListener('input', onPriceInput);
 selectCheckIn.addEventListener('change', onSelectChange);
 selectCheckOut.addEventListener('change', onSelectChange);
 selectType.addEventListener('change', onTypeInputChange);
 selectRoomNumber.addEventListener('change', onSelectRoomsChange);
 form.addEventListener('submit', onFormSubmit);
-resetButton.addEventListener('click',onFormReset)
-
+resetButton.addEventListener('click', onFormReset)
 
 addressMarker.on('move', onMarkerMove);
 inputAddress.readOnly = true;
