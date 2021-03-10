@@ -13,7 +13,6 @@ const minPriceOfType = {
   house: '5000',
   bungalow: '0',
 };
-
 const TitleLength = {
   MIN: 30,
   MAX: 100,

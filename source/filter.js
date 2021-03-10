@@ -2,13 +2,6 @@
 import { reRenderMarkers } from './map.js';
 import { debounce } from './util.js';
 
-const filterForm = document.querySelector('.map__filters');
-const hostelType = filterForm.querySelector('#housing-type');
-const hostelPrice = filterForm.querySelector('#housing-price');
-const hostelRooms = filterForm.querySelector('#housing-rooms');
-const hostelGuests = filterForm.querySelector('#housing-guests');
-const hostelFeatures = filterForm.querySelector('#housing-features');
-
 const RENDER_DELAY = 500;
 const MAX_PRICE = 1000000000
 const MAX_MARKERS = 10;
@@ -31,6 +24,13 @@ const priceRange = {
   },
 }
 const ALL = 'any';
+
+const filterForm = document.querySelector('.map__filters');
+const hostelType = filterForm.querySelector('#housing-type');
+const hostelPrice = filterForm.querySelector('#housing-price');
+const hostelRooms = filterForm.querySelector('#housing-rooms');
+const hostelGuests = filterForm.querySelector('#housing-guests');
+const hostelFeatures = filterForm.querySelector('#housing-features');
 
 const compareFeatures = (checkboxes, features) => {
   if (checkboxes.length === 0) {

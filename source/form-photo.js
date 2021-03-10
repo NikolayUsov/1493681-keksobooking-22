@@ -1,12 +1,13 @@
-import { createImgElement } from './util.js'
+import { createImgElement } from './util.js';
+
+const IMG_FORMAT = ['image/jpg', 'image/png', 'image/svg', 'image/jpeg', 'image/svg+xml'];
+const HOSTEL_PHOTO_ALT = 'Фотография вашего объекта';
+const DEFAULT_SRC = 'img/muffin-grey.svg';
 
 const avatarPreviewPicture = document.querySelector('.ad-form-header__preview');
 const avatarPreviewUpLoader = document.querySelector('.ad-form-header__input');
 const hostelPreviewPicture = document.querySelector('.ad-form__photo');
 const hostelPreviewUploader = document.querySelector('.ad-form__input');
-const IMG_FORMAT = ['image/jpg', 'image/png', 'image/svg', 'image/jpeg', 'image/svg+xml'];
-const HOSTEL_PHOTO_ALT = 'Фотография вашего объекта';
-const DEFAULT_SRC = 'img/muffin-grey.svg';
 
 const onUploadeChange = (upload, preview) => {
   const file = upload.files[0];

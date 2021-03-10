@@ -2,6 +2,7 @@
 import {togglePageStatus} from './status-page.js';
 import {createHostelCardElement} from './hostel-card.js';
 import {filterMarkers} from './filter.js';
+
 export const DefaultLocation = {
   X: 35.68240,
   Y: 139.75176,
@@ -15,6 +16,7 @@ const LeafletProperties = {
   ATTRIBUTION: 'Map data: © <a href="http://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a> contributors, under ODbL | Tiles: © <a href="http://maps.sputnik.ru/" target="_blank">Спутник</a>',
 };
 
+let markerGroup;
 const MAP_ZOOM = 13;
 
 togglePageStatus(false);
@@ -68,8 +70,6 @@ export const createSearchMarker = () => {
 
   return marker;
 }
-
-let markerGroup;
 
 export const createMarker = (hostel, group) => {
 
