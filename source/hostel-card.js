@@ -63,13 +63,12 @@ export const createHostelCardElement = (hostel) => {
     description,
     photos,
   } = offer;
-
   const { avatar } = author;
 
   const hostelCardTemplate = document.querySelector('#card').content.querySelector('.popup');
   const hostelCard = hostelCardTemplate.cloneNode(true);
-
-  hostelCard.querySelector('.popup__avatar').src = avatar;
+  const avataImg = hostelCard.querySelector('.popup__avatar');
+  avatar === '' ? avataImg.remove() : avataImg.src = avatar;
   hostelCard.querySelector('.popup__title').textContent = title;
   hostelCard.querySelector('.popup__text--address').textContent = address;
   hostelCard.querySelector('.popup__text--price').innerHTML = `${price} <span>₽/ночь</span`;

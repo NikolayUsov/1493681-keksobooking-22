@@ -1,9 +1,10 @@
+/* global _:readonly */
 import { createSearchMarker, resetMap, DefaultLocation } from './map.js';
 import { sendData } from './api.js';
 import { showSuccessMessage, showErrorMessage } from './messages.js';
-import { debounce } from './util.js';
 import { clearPhotoPreview } from './form-photo.js';
 
+const INPUT_DELAY = 500;
 const MAX_GUESTS_VALUE = 100;
 const MAX_ROOMS_VALUE = 0;
 const SEND_FORM_ERROR_TEXT = 'Ошибка размещения объявления';
@@ -117,7 +118,7 @@ const onFormReset = (evt) => {
   clearPhotoPreview();
 }
 
-inputTitle.addEventListener('input', debounce(onInputTitleChange, 500));
+inputTitle.addEventListener('input', _.debounce(onInputTitleChange, INPUT_DELAY));
 inputPrice.addEventListener('input', onPriceInput);
 selectCheckIn.addEventListener('change', onSelectChange);
 selectCheckOut.addEventListener('change', onSelectChange);

@@ -1,6 +1,5 @@
-
+/* global _:readonly */
 import { reRenderMarkers } from './map.js';
-import { debounce } from './util.js';
 
 const RENDER_DELAY = 500;
 const MAX_PRICE = 1000000000
@@ -114,7 +113,7 @@ const filterMarkers = (data) => {
 }
 
 export const setFilterListener = (data) => {
-  filterForm.addEventListener('change', debounce(() => { reRenderMarkers(data) }, RENDER_DELAY));
+  filterForm.addEventListener('change', _.debounce(() => { reRenderMarkers(data) }, RENDER_DELAY));
 }
 
 export { filterHostel, filterMarkers };

@@ -7,15 +7,6 @@ export const isEscEvent = (evt) => {
   return evt.key === 'Escape' || evt.key === 'Esc';
 };
 
-export const debounce = (fn, delay) => {
-  let time;
-  return function () {
-    const debounced  = () => { fn.apply(this, arguments) }
-    clearTimeout(time);
-    time = setTimeout(debounced, delay);
-  }
-};
-
 export const  createImgElement = (alt ='', width = '50', height = '50') => {
   const img = document.createElement('img');
   img.src = '';

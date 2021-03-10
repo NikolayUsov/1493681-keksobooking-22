@@ -9,7 +9,7 @@ const avatarPreviewUpLoader = document.querySelector('.ad-form-header__input');
 const hostelPreviewPicture = document.querySelector('.ad-form__photo');
 const hostelPreviewUploader = document.querySelector('.ad-form__input');
 
-const onUploadeChange = (upload, preview) => {
+const onUploadChange = (upload, preview) => {
   const file = upload.files[0];
   const fileType = file.type;
   const matches = IMG_FORMAT.includes(fileType);
@@ -34,7 +34,7 @@ const clearPhotoPreview = () => {
   hostelPreviewPicture.innerHTML = '';
 }
 
-hostelPreviewUploader.addEventListener('change', () => onUploadeChange(hostelPreviewUploader, hostelPreviewPicture))
-avatarPreviewUpLoader.addEventListener('change', () => onUploadeChange(avatarPreviewUpLoader, avatarPreviewPicture))
+hostelPreviewUploader.addEventListener('change', () => onUploadChange(hostelPreviewUploader, hostelPreviewPicture))
+avatarPreviewUpLoader.addEventListener('change', () => onUploadChange(avatarPreviewUpLoader, avatarPreviewPicture))
 
 export { clearPhotoPreview };
